@@ -5,6 +5,18 @@
  */
 package za.ac.up.cs.cos221.prac04.GUI;
 
+import DataObjects.Staff;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import za.ac.up.cs.cos221.prac04.DBManager;
+
 /**
  *
  * @author User
@@ -14,8 +26,33 @@ public class HomePage extends javax.swing.JFrame {
 	/**
 	 * Creates new form HomePage
 	 */
-	public HomePage() {
+	public HomePage() throws SQLException {
 		initComponents();
+		String col[] = {"First Name", "Last Name", "Address", "Address2", "District", "City", "Postal Code", "Phone", "Store", "Active"};
+		for (int i = 0; i < col.length; i++) {
+			filterComboBox.addItem(col[i]);
+		}
+		
+		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+		StaffTbl.setModel(tableModel);
+
+		ArrayList<Staff> staff=DBManager.implement.populateStaff();
+		//Staff s1 = new Staff("1", "1", "1", "1", "1", "1", "1", "1", 1, true);
+		//Staff s2 = new Staff("2", "1", "1", "1", "1", "1", "1", "1", 2, true);
+		//ArrayList<Staff> staff = new ArrayList<>();
+		
+		for (int i = 0; i < staff.size(); i++) {
+			Object[] temp = {staff.get(i).getFirstName(), staff.get(i).getLastName(), staff.get(i).getAddress(), staff.get(i).getAddress2(),
+				staff.get(i).getDistrict(), staff.get(i).getCity(), staff.get(i).getPostalCode(), staff.get(i).getPhone(),
+				staff.get(i).getStore(), staff.get(i).getActive()};
+			tableModel.addRow(temp);
+		}
+
+	
+	}
+	
+	private void clearFilter(){
+		StaffTbl.setRowSorter(null);
 	}
 
 	/**
@@ -31,11 +68,13 @@ public class HomePage extends javax.swing.JFrame {
                 StaffTab = new javax.swing.JPanel();
                 StaffPanel = new javax.swing.JPanel();
                 jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
-                jTextField1 = new javax.swing.JTextField();
+                StaffTbl = new javax.swing.JTable();
+                filterFld = new javax.swing.JTextField();
                 jLabel1 = new javax.swing.JLabel();
-                jComboBox1 = new javax.swing.JComboBox<>();
+                filterComboBox = new javax.swing.JComboBox<>();
                 jLabel2 = new javax.swing.JLabel();
+                FilterBtn = new javax.swing.JButton();
+                clearFilterBtn = new javax.swing.JButton();
                 FilmsTab = new javax.swing.JPanel();
                 FilmsPanel = new javax.swing.JPanel();
                 InventoryTab = new javax.swing.JPanel();
@@ -50,38 +89,31 @@ public class HomePage extends javax.swing.JFrame {
 
                 StaffPanel.setBackground(new java.awt.Color(255, 51, 51));
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                        new Object [][] {
-                                {null, null, null, null, null, null, null, null, null, null},
-                                {null, null, null, null, null, null, null, null, null, null},
-                                {null, null, null, null, null, null, null, null, null, null},
-                                {null, null, null, null, null, null, null, null, null, null}
-                        },
-                        new String [] {
-                                "First Name", "Last Name", "Address", "Address2", "District", "City", "Postal Code", "Phone", "Store", "Active"
-                        }
-                ) {
-                        boolean[] canEdit = new boolean [] {
-                                false, false, false, false, false, false, false, true, true, true
-                        };
+                jScrollPane1.setViewportView(StaffTbl);
 
-                        public boolean isCellEditable(int rowIndex, int columnIndex) {
-                                return canEdit [columnIndex];
-                        }
-                });
-                jScrollPane1.setViewportView(jTable1);
-
-                jTextField1.addActionListener(new java.awt.event.ActionListener() {
+                filterFld.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jTextField1ActionPerformed(evt);
+                                filterFldActionPerformed(evt);
                         }
                 });
 
                 jLabel1.setText("Filter by");
 
-                jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
                 jLabel2.setText("like");
+
+                FilterBtn.setText("Filter");
+                FilterBtn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                FilterBtnActionPerformed(evt);
+                        }
+                });
+
+                clearFilterBtn.setText("Clear Filter");
+                clearFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                clearFilterBtnActionPerformed(evt);
+                        }
+                });
 
                 javax.swing.GroupLayout StaffPanelLayout = new javax.swing.GroupLayout(StaffPanel);
                 StaffPanel.setLayout(StaffPanelLayout);
@@ -89,31 +121,37 @@ public class HomePage extends javax.swing.JFrame {
                         StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(StaffPanelLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1)
                                 .addContainerGap())
                         .addGroup(StaffPanelLayout.createSequentialGroup()
                                 .addGap(127, 127, 127)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(filterFld, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FilterBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(clearFilterBtn)
+                                .addContainerGap(282, Short.MAX_VALUE))
                 );
                 StaffPanelLayout.setVerticalGroup(
                         StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(StaffPanelLayout.createSequentialGroup()
-                                .addGap(22, 22, 22)
+                                .addGap(21, 21, 21)
                                 .addGroup(StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(filterFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel1)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
+                                        .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(FilterBtn)
+                                        .addComponent(clearFilterBtn))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(22, Short.MAX_VALUE))
+                                .addContainerGap(20, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout StaffTabLayout = new javax.swing.GroupLayout(StaffTab);
@@ -137,26 +175,22 @@ public class HomePage extends javax.swing.JFrame {
                 FilmsPanel.setLayout(FilmsPanelLayout);
                 FilmsPanelLayout.setHorizontalGroup(
                         FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 383, Short.MAX_VALUE)
+                        .addGap(0, 758, Short.MAX_VALUE)
                 );
                 FilmsPanelLayout.setVerticalGroup(
                         FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 307, Short.MAX_VALUE)
+                        .addGap(0, 381, Short.MAX_VALUE)
                 );
 
                 javax.swing.GroupLayout FilmsTabLayout = new javax.swing.GroupLayout(FilmsTab);
                 FilmsTab.setLayout(FilmsTabLayout);
                 FilmsTabLayout.setHorizontalGroup(
                         FilmsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(FilmsTabLayout.createSequentialGroup()
-                                .addComponent(FilmsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 375, Short.MAX_VALUE))
+                        .addComponent(FilmsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 );
                 FilmsTabLayout.setVerticalGroup(
                         FilmsTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(FilmsTabLayout.createSequentialGroup()
-                                .addComponent(FilmsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(FilmsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 );
 
                 jTabbedPane2.addTab("Films", FilmsTab);
@@ -220,7 +254,7 @@ public class HomePage extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(61, Short.MAX_VALUE))
+                                .addContainerGap(56, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,9 +267,20 @@ public class HomePage extends javax.swing.JFrame {
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-        private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-                // TODO add your handling code here:
-        }//GEN-LAST:event_jTextField1ActionPerformed
+        private void filterFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterFldActionPerformed
+		// TODO add your handling code here:
+        }//GEN-LAST:event_filterFldActionPerformed
+
+        private void FilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterBtnActionPerformed
+			TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) StaffTbl.getModel()));
+		sorter.setRowFilter(RowFilter.regexFilter(filterFld.getText(),filterComboBox.getSelectedIndex()));
+
+		StaffTbl.setRowSorter(sorter);
+        }//GEN-LAST:event_FilterBtnActionPerformed
+
+        private void clearFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFilterBtnActionPerformed
+               clearFilter();
+        }//GEN-LAST:event_clearFilterBtnActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -267,7 +312,11 @@ public class HomePage extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new HomePage().setVisible(true);
+				try {
+					new HomePage().setVisible(true);
+				} catch (SQLException ex) {
+					Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+				}
 			}
 		});
 	}
@@ -277,16 +326,18 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JPanel ClientsTab;
         private javax.swing.JPanel FilmsPanel;
         private javax.swing.JPanel FilmsTab;
+        private javax.swing.JButton FilterBtn;
         private javax.swing.JPanel InventoryPanel;
         private javax.swing.JPanel InventoryTab;
         private javax.swing.JPanel StaffPanel;
         private javax.swing.JPanel StaffTab;
-        private javax.swing.JComboBox<String> jComboBox1;
+        private javax.swing.JTable StaffTbl;
+        private javax.swing.JButton clearFilterBtn;
+        private javax.swing.JComboBox<String> filterComboBox;
+        private javax.swing.JTextField filterFld;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JTabbedPane jTabbedPane2;
-        private javax.swing.JTable jTable1;
-        private javax.swing.JTextField jTextField1;
         // End of variables declaration//GEN-END:variables
 }

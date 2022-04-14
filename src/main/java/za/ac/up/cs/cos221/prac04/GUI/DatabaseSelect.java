@@ -5,6 +5,9 @@
  */
 package za.ac.up.cs.cos221.prac04.GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.ac.up.cs.cos221.prac04.DBManager;
 
 /**
@@ -22,13 +25,17 @@ public class DatabaseSelect extends javax.swing.JFrame {
 
 	private void attempTest() {
 		if (DBManager.implement.testConnection("COS221_PA4", "P@$SW0RD_&")) {
-			feedbackLbl.setText("Connection success");
-			HomePage pane=new HomePage();
-			pane.pack();
-			pane.setLocationRelativeTo(null);
-			pane.setSize(700,500);
-			pane.setVisible(true);
-			this.dispose();
+			try {
+				feedbackLbl.setText("Connection success");
+				HomePage pane=new HomePage();
+				pane.pack();
+				pane.setLocationRelativeTo(null);
+				pane.setSize(850,500);
+				pane.setVisible(true);
+				this.dispose();
+			} catch (SQLException ex) {
+				Logger.getLogger(DatabaseSelect.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		} else {
 			feedbackLbl.setText("Connection failed");
 		}
