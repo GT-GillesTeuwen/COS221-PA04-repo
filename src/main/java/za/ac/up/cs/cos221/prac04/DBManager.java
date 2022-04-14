@@ -28,9 +28,9 @@ public class DBManager {
 		
 		public static void setLocal(boolean local){
 			if (local) {
-				bindAddress = "192.168.8.102:3306";
+				bindAddress = "192.168.8.102:3306/u18059288_u21465772_sakila";
 			}else{
-				bindAddress = "41.157.47.27:3306";
+				bindAddress = "41.157.47.27:3306/u18059288_u21465772_sakila";
 			}
 		}
 
