@@ -23,6 +23,12 @@ public class DatabaseSelect extends javax.swing.JFrame {
 	private void attempTest() {
 		if (DBManager.implement.testConnection("COS221_PA4", "P@$SW0RD_&")) {
 			feedbackLbl.setText("Connection success");
+			HomePage pane=new HomePage();
+			pane.pack();
+			pane.setLocationRelativeTo(null);
+			pane.setSize(700,500);
+			pane.setVisible(true);
+			this.dispose();
 		} else {
 			feedbackLbl.setText("Connection failed");
 		}
@@ -43,6 +49,7 @@ public class DatabaseSelect extends javax.swing.JFrame {
                 feedbackLbl = new javax.swing.JLabel();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setPreferredSize(null);
 
                 localBtn.setText("Local");
                 localBtn.addActionListener(new java.awt.event.ActionListener() {
