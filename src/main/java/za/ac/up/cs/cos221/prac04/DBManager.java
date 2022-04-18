@@ -5,6 +5,7 @@
  */
 package za.ac.up.cs.cos221.prac04;
 
+import DataObjects.Film;
 import DataObjects.Staff;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -86,6 +87,29 @@ public class DBManager {
 				Staff temp = new Staff(res.getString("first_name"), res.getString("last_name"), res.getString("address"),
 					res.getString("address2"), res.getString("district"), res.getString("city"), res.getString("postal_code"),
 					res.getString("phone"), res.getInt("store_id"), res.getBoolean("active"));
+
+				info.add(temp);
+
+			}
+			return info;
+		}
+                
+                public static ArrayList<Film> populateFilms() throws SQLException {
+			ArrayList<Film> info = new ArrayList<>();
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				Statement state = con.createStatement();
+				res = state.executeQuery("SELECT * FROM u18059288_u21465772_sakila.film;");
+
+			} catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			while (res.next()) {
+
+				Film temp = new Film(res.getString(2), res.getString(3), res.getString(4), res.getInt(9), res.getString(11));
 
 				info.add(temp);
 
