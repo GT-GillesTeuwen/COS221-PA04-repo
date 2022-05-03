@@ -7,12 +7,15 @@ package za.ac.up.cs.cos221.prac04.GUI;
 
 import DataObjects.City;
 import DataObjects.Country;
+import DataObjects.Store;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import DataObjects.Store;
 import za.ac.up.cs.cos221.prac04.DBManager;
 
 /**
@@ -36,7 +39,7 @@ public class ClientPane extends javax.swing.JFrame {
 	public ClientPane() {
 		initComponents();
 		setupCountryComboBox();
-		
+		setupStoreComboBox();
 	}
 	
 	private void setupCountryComboBox() {
@@ -69,6 +72,17 @@ public class ClientPane extends javax.swing.JFrame {
 			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
+    private void setupStoreComboBox(){
+        try{
+            storeComboBox.removeAllItems();
+            ArrayList<Store> allStores = DBManager.implement.populateStore();
+            for (int i =0; i<allStores.size(); i++){
+                storeComboBox.addItem(allStores.get(i).getStore());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 	/**
 	 * This method is called from within the constructor to initialize the

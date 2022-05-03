@@ -10,6 +10,7 @@ import DataObjects.Country;
 import DataObjects.Film;
 import DataObjects.Language;
 import DataObjects.Staff;
+import DataObjects.Store;
 import DataObjects.Client;
 import DataObjects.StoreGenreCount;
 import java.sql.Connection;
@@ -21,8 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 
 /**
  *
@@ -91,8 +91,8 @@ public class DBManager {
 			while (res.next()) {
 
 				Staff temp = new Staff(res.getString("first_name"), res.getString("last_name"), res.getString("address"),
-					res.getString("address2"), res.getString("district"), res.getString("city"), res.getString("postal_code"),
-					res.getString("phone"), res.getInt("store_id"), res.getBoolean("active"));
+						res.getString("address2"), res.getString("district"), res.getString("city"), res.getString("postal_code"),
+						res.getString("phone"), res.getInt("store_id"), res.getBoolean("active"));
 
 				info.add(temp);
 
@@ -124,17 +124,17 @@ public class DBManager {
 		}
 
 		public static boolean insertFilm(String title, String description, int releaseYear, int languageID, int originalLanguageID,
-			int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features) throws SQLException {
+										 int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features) throws SQLException {
 			ArrayList<Film> info = new ArrayList<>();
 			if (con == null) {
 				getConnection();
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("INSERT INTO \n"
-					+ "u18059288_u21465772_sakila.film\n"
-					+ "(title,description,release_year,language_id,original_language_id,rental_duration,rental_rate,length,replacement_cost,rating,special_features)\n"
-					+ "VALUES\n"
-					+ "(?,?,?,?,?,?,?,?,?,?,?)");
+						+ "u18059288_u21465772_sakila.film\n"
+						+ "(title,description,release_year,language_id,original_language_id,rental_duration,rental_rate,length,replacement_cost,rating,special_features)\n"
+						+ "VALUES\n"
+						+ "(?,?,?,?,?,?,?,?,?,?,?)");
 
 				state.setString(1, title);
 				state.setString(2, description);
@@ -188,13 +188,13 @@ public class DBManager {
 			try {
 				Statement state = con.createStatement();
 				res = state.executeQuery("select \n"
-					+ "CONCAT(city.city, _utf8mb4',', country.country) AS Store, category.name, count(*) as NUM \n"
-					+ "from inventory inner join film_category on inventory.film_id=film_category.film_id \n"
-					+ "inner join store on inventory.store_id=store.store_id inner join address on store.address_id = address.address_id \n"
-					+ "inner join city on address.city_id = city.city_id inner join country on city.country_id = country.country_id \n"
-					+ "inner join category on film_category.category_id = category.category_id  \n"
-					+ "group by film_category.category_id, store.store_id\n"
-					+ "Order by Store");
+						+ "CONCAT(city.city, _utf8mb4',', country.country) AS Store, category.name, count(*) as NUM \n"
+						+ "from inventory inner join film_category on inventory.film_id=film_category.film_id \n"
+						+ "inner join store on inventory.store_id=store.store_id inner join address on store.address_id = address.address_id \n"
+						+ "inner join city on address.city_id = city.city_id inner join country on city.country_id = country.country_id \n"
+						+ "inner join category on film_category.category_id = category.category_id  \n"
+						+ "group by film_category.category_id, store.store_id\n"
+						+ "Order by Store");
 
 			} catch (SQLException ex) {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,17 +265,17 @@ public class DBManager {
 			try {
 				Statement state = con.createStatement();
 				res = state.executeQuery("select customer.customer_id, customer.first_name, customer.last_name, customer.email, \n"
-					+ "address.phone, address.address, city.city, country.country, customer.store_id, customer.active \n"
-					+ "from customer inner join address on customer.address_id=address.address_id \n"
-					+ "inner join city on address.city_id=city.city_id \n"
-					+ "inner join country on city.country_id=country.country_id \n"
-					+ "order by customer.store_id");
+						+ "address.phone, address.address, city.city, country.country, customer.store_id, customer.active \n"
+						+ "from customer inner join address on customer.address_id=address.address_id \n"
+						+ "inner join city on address.city_id=city.city_id \n"
+						+ "inner join country on city.country_id=country.country_id \n"
+						+ "order by customer.store_id");
 			} catch (SQLException ex) {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			while (res.next()) {
 				Client temp = new Client(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5),
-					res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getBoolean(10));
+						res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getBoolean(10));
 				info.add(temp);
 			}
 			return info;
@@ -288,13 +288,13 @@ public class DBManager {
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`customer` "
-					+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
-					+ "VALUES (?,?,?,?,?,?);");
+						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
+						+ "VALUES (?,?,?,?,?,?);");
 
 				state.setInt(1, store_id);
 				state.setString(2, firstName);
-				state.setString(2, lastName);
-				state.setString(2, email);
+				state.setString(3, lastName);
+				state.setString(4, email);
 				state.setInt(5, addressId);
 				state.setInt(6, active);
 
@@ -305,7 +305,6 @@ public class DBManager {
 				return false;
 			}
 		}
-
 		public static boolean removeClient(int customer_ID) throws SQLException {
 			ResultSet res = null;
 			if (con == null) {
@@ -326,8 +325,28 @@ public class DBManager {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 				return false;
 			}
+		}
 
-		
-		//public static boolean removeUser(int customer_ID, )
+		public static ArrayList<Store> populateStore() throws SQLException{
+			ArrayList<Store> info = new ArrayList<>();
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try{
+				Statement state = con.createStatement();
+				res = state.executeQuery("select CONCAT(city.city, _utf8mb4',', country.country) AS Store from store \n"
+						+"inner join address on store.address_id=address.address_id \n"
+						+"inner join city on address.city_id=city.city_id \n"
+						+"inner join country on city.country_id=country.country_id");
+			}catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			while(res.next()){
+				Store temp = new Store(res.getString(1));
+				info.add(temp);
+			}
+			return info;
+		}
 	}
-		 }
+}
