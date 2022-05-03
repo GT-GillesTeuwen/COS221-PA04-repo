@@ -504,11 +504,11 @@ public class HomePage extends javax.swing.JFrame {
 		String value = clientTbl.getModel().getValueAt(row, 0).toString();
 		System.out.println(value);
 		try {
-			ClientPane cp=new ClientPane(this,Integer.parseInt(value));
+			ClientPane cp = new ClientPane(this, Integer.parseInt(value));
 			cp.pack();
-		cp.setLocationRelativeTo(null);
-		cp.setSize(750, 500);
-		cp.setVisible(true);
+			cp.setLocationRelativeTo(null);
+			cp.setSize(750, 500);
+			cp.setVisible(true);
 		} catch (SQLException ex) {
 			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
 		}
