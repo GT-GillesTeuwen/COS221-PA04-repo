@@ -145,6 +145,8 @@ public class HomePage extends javax.swing.JFrame {
                 jButton1 = new javax.swing.JButton();
                 jScrollPane4 = new javax.swing.JScrollPane();
                 clientTbl = new javax.swing.JTable();
+                up = new javax.swing.JButton();
+                del = new javax.swing.JButton();
 
                 Update.setText("Update");
                 Update.addActionListener(new java.awt.event.ActionListener() {
@@ -405,6 +407,26 @@ public class HomePage extends javax.swing.JFrame {
                 });
                 jScrollPane4.setViewportView(clientTbl);
 
+                up.setBackground(new java.awt.Color(206, 120, 1));
+                up.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                up.setForeground(new java.awt.Color(255, 255, 255));
+                up.setText("Update");
+                up.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                upActionPerformed(evt);
+                        }
+                });
+
+                del.setBackground(new java.awt.Color(206, 120, 1));
+                del.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                del.setForeground(new java.awt.Color(255, 255, 255));
+                del.setText("Delete");
+                del.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                delActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout ClientsPanelLayout = new javax.swing.GroupLayout(ClientsPanel);
                 ClientsPanel.setLayout(ClientsPanelLayout);
                 ClientsPanelLayout.setHorizontalGroup(
@@ -413,14 +435,22 @@ public class HomePage extends javax.swing.JFrame {
                                 .addContainerGap(16, Short.MAX_VALUE)
                                 .addGroup(ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1))
+                                        .addGroup(ClientsPanelLayout.createSequentialGroup()
+                                                .addComponent(del)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(up)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton1)))
                                 .addGap(33, 33, 33))
                 );
                 ClientsPanelLayout.setVerticalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(ClientsPanelLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1)
+                                .addGroup(ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton1)
+                                        .addComponent(up)
+                                        .addComponent(del))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(28, Short.MAX_VALUE))
@@ -519,10 +549,39 @@ public class HomePage extends javax.swing.JFrame {
 			int row = clientTbl.getSelectedRow();
 			String value = clientTbl.getModel().getValueAt(row, 0).toString();
 			DBManager.implement.removeClient(Integer.parseInt(value));
+			refreshClientTbl();
 		} catch (SQLException ex) {
 			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
 		}
         }//GEN-LAST:event_DeleteActionPerformed
+
+        private void upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upActionPerformed
+                int row = clientTbl.getSelectedRow();
+		String value = clientTbl.getModel().getValueAt(row, 0).toString();
+		System.out.println(value);
+		try {
+			ClientPane cp = new ClientPane(this, Integer.parseInt(value));
+			cp.pack();
+			cp.setLocationRelativeTo(null);
+			cp.setSize(750, 500);
+			cp.setVisible(true);
+		} catch (SQLException ex) {
+			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
+        }//GEN-LAST:event_upActionPerformed
+
+        private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
+               try {
+			int row = clientTbl.getSelectedRow();
+			String value = clientTbl.getModel().getValueAt(row, 0).toString();
+			DBManager.implement.removeClient(Integer.parseInt(value));
+			refreshClientTbl();
+		} catch (SQLException ex) {
+			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	       
+        }//GEN-LAST:event_delActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -581,6 +640,7 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JButton clearFilterBtn;
         private javax.swing.JPopupMenu clientPopupMenu;
         private javax.swing.JTable clientTbl;
+        private javax.swing.JButton del;
         private javax.swing.JComboBox<String> filterComboBox;
         private javax.swing.JTextField filterFld;
         private javax.swing.JButton jButton1;
@@ -592,6 +652,7 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JScrollPane jScrollPane4;
         private javax.swing.JTabbedPane jTabbedPane2;
         private javax.swing.JTable storeGenreCountTbl;
+        private javax.swing.JButton up;
         // End of variables declaration//GEN-END:variables
 
 }

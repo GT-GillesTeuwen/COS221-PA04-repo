@@ -330,7 +330,7 @@ public class DBManager {
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`customer` "
-						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`, 'create_date') "
+						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`, `create_date`) "
 						+ "VALUES (?,?,?,?,?,?,?)");
 
 				state.setInt(1, store_id);
