@@ -380,6 +380,33 @@ public class DBManager {
 			}
 			return info;
 		}
+		public static boolean updateAddress(int customer_id, String add1, String add2, String district, String phone, int city_id) throws SQLException{
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				PreparedStatement address = con.prepareStatement("select address.address_id from address \n"
+						+"inner join customer on customer.address_id=address.address_id where customer.customer_id=?");
+				address.setInt(1, customer_id);
+				res = address.executeQuery();
+				PreparedStatement state = con.prepareStatement("update address set address=?, address2=?, district=?, \n"
+						+"phone=?, city_id=? where address.address_id=?");
+				state.setString(1, add1);
+				state.setString(2, add2);
+				state.setString(3, district);
+				state.setString(4, phone);
+				state.setInt(5, city_id);
+				state.setInt(6, res.getInt(1));
+				state.executeUpdate();
+				return true;
+			}
+			catch (SQLException ex){
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
+
+		}
 
 	}
 }
