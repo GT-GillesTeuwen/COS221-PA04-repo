@@ -415,7 +415,14 @@ public class DBManager {
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("update customer set first_name=?, last_name=?, store_id=?, \n"
-						+ "email=?, active=? ");
+						+ "email=?, active=? where customer.customer_id=?");
+				state.setString(1, fName);
+				state.setString(2, surname);
+				state.setInt(3, store_id);
+				state.setString(4, email);
+				state.setInt(5, active);
+				state.setInt(6, customer_id);
+				state.executeUpdate();
 				return true;
 			}
 			catch (SQLException ex){
