@@ -20,7 +20,9 @@ public class AddFilm extends javax.swing.JFrame {
     /**
      * Creates new form AddFilm
      */
-    public AddFilm() {
+    private HomePage hp;
+    public AddFilm(HomePage hp) {
+        this.hp=hp;
         initComponents();
         try {
             ArrayList<Language> allLanguages=DBManager.implement.populateLanguages();
@@ -187,7 +189,7 @@ public class AddFilm extends javax.swing.JFrame {
         replacementCostSpinner.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         replacementCostSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
-        addFilmBtn.setText("Add");
+        addFilmBtn.setText("Add & Close");
         addFilmBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addFilmBtnActionPerformed(evt);
@@ -239,22 +241,16 @@ public class AddFilm extends javax.swing.JFrame {
                         .addComponent(originalLanguageComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(commentariesCheckBox)
+                    .addComponent(behindTheScenesCheckBox)
+                    .addComponent(replacementCostSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rentalDurationSpinner)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rentalRateSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(114, 114, 114))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commentariesCheckBox)
-                            .addComponent(behindTheScenesCheckBox)
-                            .addComponent(replacementCostSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(addFilmBtn)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(21, 21, 21)
+                        .addComponent(addFilmBtn))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(rentalDurationSpinner, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(rentalRateSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,6 +334,8 @@ public class AddFilm extends javax.swing.JFrame {
             }
             
             DBManager.implement.insertFilm(titleFld.getText(), descriptionArea.getText(), releaseYearChooser.getYear(), ((Language)languageComboBox.getSelectedItem()).getId(), ((Language)originalLanguageComboBox.getSelectedItem()).getId(), (int)rentalDurationSpinner.getValue(), (double)rentalRateSpinner.getValue(), (int)lengthSpinner.getValue(), (double)replacementCostSpinner.getValue(), ratingComboBox.getSelectedItem().toString(), features);
+            hp.refreshFilmTbl();
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(AddFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -373,7 +371,7 @@ public class AddFilm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddFilm().setVisible(true);
+                new AddFilm(null).setVisible(true);
             }
         });
     }

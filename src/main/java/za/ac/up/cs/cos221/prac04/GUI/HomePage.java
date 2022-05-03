@@ -55,7 +55,7 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
-    private void refreshFilmTbl() throws SQLException {
+    public void refreshFilmTbl() throws SQLException {
 
         String filmCol[] = {"Title", "Description", "Release Year", "Length", "Rating"};
 
@@ -330,7 +330,7 @@ public class HomePage extends javax.swing.JFrame {
         }//GEN-LAST:event_clearFilterBtnActionPerformed
 
     private void addFilmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFilmBtnActionPerformed
-        AddFilm newPane = new AddFilm();
+        AddFilm newPane = new AddFilm(this);
         newPane.pack();
         newPane.setLocationRelativeTo(null);
         newPane.setSize(950, 500);

@@ -80,29 +80,19 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rentalDurationSpinner" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="rentalRateSpinner" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="commentariesCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="behindTheScenesCheckBox" min="-2" max="-2" attributes="0"/>
+                  <Component id="replacementCostSpinner" min="-2" pref="100" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="commentariesCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="behindTheScenesCheckBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="replacementCostSpinner" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="addFilmBtn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="addFilmBtn" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="rentalDurationSpinner" alignment="0" max="32767" attributes="0"/>
+                      <Component id="rentalRateSpinner" alignment="0" pref="100" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -458,7 +448,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="addFilmBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="Add &amp; Close"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addFilmBtnActionPerformed"/>
