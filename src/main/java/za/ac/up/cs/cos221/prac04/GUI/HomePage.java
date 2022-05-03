@@ -120,6 +120,7 @@ public class HomePage extends javax.swing.JFrame {
                 storeGenreCountTbl = new javax.swing.JTable();
                 ClientsTab = new javax.swing.JPanel();
                 ClientsPanel = new javax.swing.JPanel();
+                jButton1 = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setPreferredSize(new java.awt.Dimension(400, 500));
@@ -306,15 +307,28 @@ public class HomePage extends javax.swing.JFrame {
 
                 ClientsPanel.setBackground(new java.awt.Color(0, 204, 0));
 
+                jButton1.setText("Add Client");
+                jButton1.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jButton1ActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout ClientsPanelLayout = new javax.swing.GroupLayout(ClientsPanel);
                 ClientsPanel.setLayout(ClientsPanelLayout);
                 ClientsPanelLayout.setHorizontalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 889, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClientsPanelLayout.createSequentialGroup()
+                                .addContainerGap(658, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(145, 145, 145))
                 );
                 ClientsPanelLayout.setVerticalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 381, Short.MAX_VALUE)
+                        .addGroup(ClientsPanelLayout.createSequentialGroup()
+                                .addGap(165, 165, 165)
+                                .addComponent(jButton1)
+                                .addContainerGap(192, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout ClientsTabLayout = new javax.swing.GroupLayout(ClientsTab);
@@ -373,6 +387,14 @@ public class HomePage extends javax.swing.JFrame {
         newPane.setVisible(true);
     }//GEN-LAST:event_addFilmBtnActionPerformed
 
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+               ClientPane newPane = new ClientPane();
+        newPane.pack();
+        newPane.setLocationRelativeTo(null);
+        newPane.setSize(750, 500);
+        newPane.setVisible(true);
+        }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -428,6 +450,7 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JButton clearFilterBtn;
         private javax.swing.JComboBox<String> filterComboBox;
         private javax.swing.JTextField filterFld;
+        private javax.swing.JButton jButton1;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JScrollPane jScrollPane1;

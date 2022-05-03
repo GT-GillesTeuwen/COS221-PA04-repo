@@ -16,6 +16,5 @@ public class main {
 		DatabaseSelect pane= new DatabaseSelect();
 		pane.setLocationRelativeTo(null);
 		pane.setVisible(true);
-                System.out.println("done");
         }
 }
