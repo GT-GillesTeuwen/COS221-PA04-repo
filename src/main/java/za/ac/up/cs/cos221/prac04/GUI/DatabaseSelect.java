@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import za.ac.up.cs.cos221.prac04.DBManager;
+import za.ac.up.cs.cos221.prac04.main;
 
 /**
  *
@@ -32,6 +33,7 @@ public class DatabaseSelect extends javax.swing.JFrame {
 				pane.setLocationRelativeTo(null);
 				pane.setSize(950,500);
 				pane.setVisible(true);
+				
 				this.dispose();
 			} catch (SQLException ex) {
 				Logger.getLogger(DatabaseSelect.class.getName()).log(Level.SEVERE, null, ex);
