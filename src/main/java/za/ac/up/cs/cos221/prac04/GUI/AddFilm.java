@@ -30,7 +30,6 @@ public class AddFilm extends javax.swing.JFrame {
                 languageComboBox.addItem(allLanguages.get(i));
                 originalLanguageComboBox.addItem(allLanguages.get(i));
             }
-            System.out.println("OK");
             
         } catch (SQLException ex) {
             Logger.getLogger(AddFilm.class.getName()).log(Level.SEVERE, null, ex);

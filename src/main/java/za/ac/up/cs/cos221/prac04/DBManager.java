@@ -5,6 +5,8 @@
  */
 package za.ac.up.cs.cos221.prac04;
 
+import DataObjects.City;
+import DataObjects.Country;
 import DataObjects.Film;
 import DataObjects.Language;
 import DataObjects.Staff;
@@ -19,8 +21,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -45,7 +47,7 @@ public class DBManager {
         public static boolean testConnection(String username, String password) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://" + bindAddress, username, password);
+		    con = DriverManager.getConnection("jdbc:mysql://" + bindAddress, username, password);
                 System.out.println("Connected to Server");
             } catch (ClassNotFoundException ex) {
 
@@ -207,6 +209,53 @@ public class DBManager {
             return info;
         }
 
+	public static ArrayList<Country> populateCountries() throws SQLException {
+            ArrayList<Country> info = new ArrayList<>();
+            ResultSet res = null;
+            if (con == null) {
+                getConnection();
+            }
+            try {
+                Statement state = con.createStatement();
+                res = state.executeQuery("SELECT country_id,country FROM u18059288_u21465772_sakila.country;");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (res.next()) {
+
+                Country temp = new Country(res.getInt(1), res.getString(2));
+
+                info.add(temp);
+
+            }
+            return info;
+        }
+
+	public static ArrayList<City> populateCountryCities(int countryId) throws SQLException {
+            ArrayList<City> info = new ArrayList<>();
+            ResultSet res = null;
+            if (con == null) {
+                getConnection();
+            }
+            try {
+                PreparedStatement state = con.prepareStatement("SELECT * FROM u18059288_u21465772_sakila.city where country_id=?;");
+		state.setInt(1, countryId);
+		res=state.executeQuery();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (res.next()) {
+
+                City temp = new City(res.getInt(1), res.getString(2),res.getInt(3));
+
+                info.add(temp);
+
+            }
+            return info;
+        }
+
         public static ArrayList<Client> populateClient() throws SQLException{
             ArrayList<Client> info = new ArrayList<>();
             ResultSet res = null;
@@ -230,6 +279,8 @@ public class DBManager {
             }
             return info;
         }
+
+
 
         public static boolean removeUser(int customer_ID, )
 
