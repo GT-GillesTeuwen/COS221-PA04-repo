@@ -4,6 +4,13 @@
  */
 package za.ac.up.cs.cos221.prac04.GUI;
 
+import DataObjects.Language;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import za.ac.up.cs.cos221.prac04.DBManager;
+
 /**
  *
  * @author gteuw
@@ -15,6 +22,18 @@ public class AddFilm extends javax.swing.JFrame {
      */
     public AddFilm() {
         initComponents();
+        try {
+            ArrayList<Language> allLanguages=DBManager.implement.populateLanguages();
+            for (int i = 0; i < allLanguages.size(); i++) {
+                languageComboBox.addItem(allLanguages.get(i));
+                originalLanguageComboBox.addItem(allLanguages.get(i));
+            }
+            System.out.println("OK");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -52,6 +71,7 @@ public class AddFilm extends javax.swing.JFrame {
         behindTheScenesCheckBox = new javax.swing.JCheckBox();
         replacementCostLbl = new javax.swing.JLabel();
         replacementCostSpinner = new javax.swing.JSpinner();
+        addFilmBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 370));
@@ -167,6 +187,13 @@ public class AddFilm extends javax.swing.JFrame {
         replacementCostSpinner.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         replacementCostSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
 
+        addFilmBtn.setText("Add");
+        addFilmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addFilmBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,9 +224,6 @@ public class AddFilm extends javax.swing.JFrame {
                                 .addComponent(rentalDurationLbl)
                                 .addComponent(replacementCostLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rentalRateLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lengthSpinner)
-                            .addComponent(ratingComboBox, 0, 100, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(releaseYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,11 +231,12 @@ public class AddFilm extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(trailerCheckBox)
-                                .addComponent(jLabel10))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(originalLanguageComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(156, 156, 156)
-                        .addComponent(deltedScenesCheckBox)))
+                                .addComponent(jLabel10)
+                                .addComponent(deltedScenesCheckBox))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ratingComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lengthSpinner, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(originalLanguageComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 100, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -225,7 +250,10 @@ public class AddFilm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(commentariesCheckBox)
                             .addComponent(behindTheScenesCheckBox)
-                            .addComponent(replacementCostSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(replacementCostSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(addFilmBtn)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -278,7 +306,9 @@ public class AddFilm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ratingLbl)
                     .addComponent(ratingComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addFilmBtn)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,6 +317,31 @@ public class AddFilm extends javax.swing.JFrame {
     private void trailerCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trailerCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_trailerCheckBoxActionPerformed
+
+    private void addFilmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFilmBtnActionPerformed
+        try {
+            String features="";
+            if (trailerCheckBox.isSelected()) {
+                features+="Trailers,";
+            }
+            if (commentariesCheckBox.isSelected()) {
+                features+="Commentaries,";
+            }
+            if (deltedScenesCheckBox.isSelected()) {
+                features+="Deleted Scenes,";
+            }
+            if (behindTheScenesCheckBox.isSelected()) {
+                features+="Behind the Scenes,";
+            }
+            if (features.length()>0) {
+                features=features.substring(0, features.length()-1);
+            }
+            
+            DBManager.implement.insertFilm(titleFld.getText(), descriptionArea.getText(), releaseYearChooser.getYear(), ((Language)languageComboBox.getSelectedItem()).getId(), ((Language)originalLanguageComboBox.getSelectedItem()).getId(), (int)rentalDurationSpinner.getValue(), (double)rentalRateSpinner.getValue(), (int)lengthSpinner.getValue(), (double)replacementCostSpinner.getValue(), ratingComboBox.getSelectedItem().toString(), features);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_addFilmBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +379,7 @@ public class AddFilm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addFilmBtn;
     private javax.swing.JCheckBox behindTheScenesCheckBox;
     private javax.swing.JCheckBox commentariesCheckBox;
     private javax.swing.JCheckBox deltedScenesCheckBox;
@@ -331,12 +387,12 @@ public class AddFilm extends javax.swing.JFrame {
     private javax.swing.JLabel descriptionLbl;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> languageComboBox;
+    private javax.swing.JComboBox<Language> languageComboBox;
     private javax.swing.JLabel languageLbl;
     private javax.swing.JLabel lengthLbl;
     private javax.swing.JSpinner lengthSpinner;
     private javax.swing.JLabel orginalLanguageLbl;
-    private javax.swing.JComboBox<String> originalLanguageComboBox;
+    private javax.swing.JComboBox<Language> originalLanguageComboBox;
     private javax.swing.JComboBox<String> ratingComboBox;
     private javax.swing.JLabel ratingLbl;
     private com.toedter.calendar.JYearChooser releaseYearChooser;

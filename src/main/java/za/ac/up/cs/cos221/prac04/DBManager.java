@@ -6,6 +6,7 @@
 package za.ac.up.cs.cos221.prac04;
 
 import DataObjects.Film;
+import DataObjects.Language;
 import DataObjects.Staff;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -121,7 +122,6 @@ public class DBManager {
         public static boolean insertFilm(String title, String description, int releaseYear, int languageID, int originalLanguageID, 
                 int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features) throws SQLException {
             ArrayList<Film> info = new ArrayList<>();
-            ResultSet res = null;
             if (con == null) {
                 getConnection();
             }
@@ -144,12 +144,35 @@ public class DBManager {
                 state.setString(10, rating);
                 state.setString(11, features);
 
-                res = state.executeQuery();
+                state.executeUpdate();
                 return true;
             } catch (SQLException ex) {
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }
+        }
+        
+        public static ArrayList<Language> populateLanguages() throws SQLException {
+            ArrayList<Language> info = new ArrayList<>();
+            ResultSet res = null;
+            if (con == null) {
+                getConnection();
+            }
+            try {
+                Statement state = con.createStatement();
+                res = state.executeQuery("SELECT language_id,name FROM u18059288_u21465772_sakila.language;");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (res.next()) {
+
+                Language temp = new Language(res.getInt(1), res.getString(2));
+
+                info.add(temp);
+
+            }
+            return info;
         }
 
     }
