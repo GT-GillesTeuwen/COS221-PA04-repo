@@ -321,8 +321,8 @@ public class DBManager {
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`customer` "
-						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
-						+ "VALUES (?,?,?,?,?,?);");
+						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`, 'create_date') "
+						+ "VALUES (?,?,?,?,?,?,?)");
 
 				state.setInt(1, store_id);
 				state.setString(2, firstName);
@@ -330,7 +330,9 @@ public class DBManager {
 				state.setString(4, email);
 				state.setInt(5, addressId);
 				state.setInt(6, active);
-
+				java.util.Date now = new java.util.Date();
+				java.sql.Date curr= new java.sql.Date(now.getDate());
+				state.setDate(7, curr);
 				state.executeUpdate();
 				return true;
 			} catch (SQLException ex) {
@@ -399,6 +401,21 @@ public class DBManager {
 				state.setInt(5, city_id);
 				state.setInt(6, res.getInt(1));
 				state.executeUpdate();
+				return true;
+			}
+			catch (SQLException ex){
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
+
+		}
+		public static boolean updateClient(int customer_id, String fName, String surname, int store_id, String email, int active) throws SQLException{
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				PreparedStatement state = con.prepareStatement("update customer set first_name=?, last_name=?, store_id=?, \n"
+						+ "email=?, active=? ");
 				return true;
 			}
 			catch (SQLException ex){
