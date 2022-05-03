@@ -25,8 +25,9 @@ public class ClientPane extends javax.swing.JFrame {
 	 * Creates new form ClientPane
 	 */
 	private int clientId = -1;
-	
-	public ClientPane(int id) {
+	private HomePage homePage;
+	public ClientPane(HomePage hp,int id) {
+		this.homePage=hp;
 		this.clientId = id;
 		initComponents();
 		
@@ -340,6 +341,14 @@ public class ClientPane extends javax.swing.JFrame {
 		} else {
 			
 		}
+		
+		
+		try {
+			homePage.refreshClientTbl();
+		} catch (SQLException ex) {
+			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
+		}
+			
         }//GEN-LAST:event_addClientBtnActionPerformed
 
         private void titleFld4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFld4ActionPerformed

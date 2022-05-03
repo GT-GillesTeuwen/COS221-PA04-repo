@@ -5,6 +5,7 @@
  */
 package za.ac.up.cs.cos221.prac04.GUI;
 
+import DataObjects.Client;
 import DataObjects.Film;
 import DataObjects.Staff;
 import DataObjects.StoreGenreCount;
@@ -25,79 +26,100 @@ import za.ac.up.cs.cos221.prac04.DBManager;
  */
 public class HomePage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HomePage
-     */
-    public HomePage() throws SQLException {
-        initComponents();
-        refreshStaffTbl();
-        refreshFilmTbl();
-        refreshStoreGenreCountTbl();
+	/**
+	 * Creates new form HomePage
+	 */
+	public HomePage() throws SQLException {
+		initComponents();
+		refreshStaffTbl();
+		refreshFilmTbl();
+		refreshStoreGenreCountTbl();
+		refreshClientTbl();
 
-    }
+	}
 
-    private void clearFilter() {
-        StaffTbl.setRowSorter(null);
+	private void clearFilter() {
+		StaffTbl.setRowSorter(null);
 
-    }
+	}
 
-    private void refreshStaffTbl() throws SQLException {
-        String staffCol[] = {"First Name", "Last Name", "Address", "Address2", "District", "City", "Postal Code", "Phone", "Store", "Active"};
-        for (int i = 0; i < staffCol.length; i++) {
-            filterComboBox.addItem(staffCol[i]);
-        }
-        DefaultTableModel staffTableModel = new DefaultTableModel(staffCol, 0);
-        StaffTbl.setModel(staffTableModel);
-        ArrayList<Staff> staff = DBManager.implement.populateStaff();
-        for (int i = 0; i < staff.size(); i++) {
-            Object[] temp = {staff.get(i).getFirstName(), staff.get(i).getLastName(), staff.get(i).getAddress(), staff.get(i).getAddress2(),
-                staff.get(i).getDistrict(), staff.get(i).getCity(), staff.get(i).getPostalCode(), staff.get(i).getPhone(),
-                staff.get(i).getStore(), staff.get(i).getActive()};
-            staffTableModel.addRow(temp);
-        }
-    }
+	private void refreshStaffTbl() throws SQLException {
+		String staffCol[] = {"First Name", "Last Name", "Address", "Address2", "District", "City", "Postal Code", "Phone", "Store", "Active"};
+		for (int i = 0; i < staffCol.length; i++) {
+			filterComboBox.addItem(staffCol[i]);
+		}
+		DefaultTableModel staffTableModel = new DefaultTableModel(staffCol, 0);
+		StaffTbl.setModel(staffTableModel);
+		ArrayList<Staff> staff = DBManager.implement.populateStaff();
+		for (int i = 0; i < staff.size(); i++) {
+			Object[] temp = {staff.get(i).getFirstName(), staff.get(i).getLastName(), staff.get(i).getAddress(), staff.get(i).getAddress2(),
+				staff.get(i).getDistrict(), staff.get(i).getCity(), staff.get(i).getPostalCode(), staff.get(i).getPhone(),
+				staff.get(i).getStore(), staff.get(i).getActive()};
+			staffTableModel.addRow(temp);
+		}
+	}
 
-    public void refreshFilmTbl() throws SQLException {
+	public void refreshFilmTbl() throws SQLException {
 
-        String filmCol[] = {"Title", "Description", "Release Year", "Length", "Rating"};
+		String filmCol[] = {"Title", "Description", "Release Year", "Length", "Rating"};
 
-        DefaultTableModel filmTableModel = new DefaultTableModel(filmCol, 0);
+		DefaultTableModel filmTableModel = new DefaultTableModel(filmCol, 0);
 
-        FilmsTbl.setModel(filmTableModel);
+		FilmsTbl.setModel(filmTableModel);
 
-        ArrayList<Film> films = DBManager.implement.populateFilms();
+		ArrayList<Film> films = DBManager.implement.populateFilms();
 
-        for (int i = 0; i < films.size(); i++) {
-            Object[] temp = {films.get(i).getTitle(), films.get(i).getDescription(), films.get(i).getReleaseYear(), films.get(i).getLength(), films.get(i).getRating()};
-            filmTableModel.addRow(temp);
-        }
-    }
-    
-    public void refreshStoreGenreCountTbl() throws SQLException {
+		for (int i = 0; i < films.size(); i++) {
+			Object[] temp = {films.get(i).getTitle(), films.get(i).getDescription(), films.get(i).getReleaseYear(), films.get(i).getLength(), films.get(i).getRating()};
+			filmTableModel.addRow(temp);
+		}
+	}
 
-        String storeGenreCountCol[] = {"Store Name", "Genre", "Number in stock"};
+	public void refreshStoreGenreCountTbl() throws SQLException {
 
-        DefaultTableModel storeGenreCountModel = new DefaultTableModel(storeGenreCountCol, 0);
+		String storeGenreCountCol[] = {"Store Name", "Genre", "Number in stock"};
 
-        storeGenreCountTbl.setModel(storeGenreCountModel);
+		DefaultTableModel storeGenreCountModel = new DefaultTableModel(storeGenreCountCol, 0);
 
-        ArrayList<StoreGenreCount> storeGenreCount = DBManager.implement.populateStoreGenreCount();
+		storeGenreCountTbl.setModel(storeGenreCountModel);
 
-        for (int i = 0; i < storeGenreCount.size(); i++) {
-            Object[] temp = {storeGenreCount.get(i).getStore(), storeGenreCount.get(i).getGenre(), storeGenreCount.get(i).getNumber()};
-            storeGenreCountModel.addRow(temp);
-        }
-    }
+		ArrayList<StoreGenreCount> storeGenreCount = DBManager.implement.populateStoreGenreCount();
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+		for (int i = 0; i < storeGenreCount.size(); i++) {
+			Object[] temp = {storeGenreCount.get(i).getStore(), storeGenreCount.get(i).getGenre(), storeGenreCount.get(i).getNumber()};
+			storeGenreCountModel.addRow(temp);
+		}
+	}
+
+	public void refreshClientTbl() throws SQLException {
+
+		String clientCol[] = {"ID", "First Name", "Surname", "Email", "Phone", "Address", "City", "Country", "store", "active"};
+
+		DefaultTableModel clientModel = new DefaultTableModel(clientCol, 0);
+
+		clientTbl.setModel(clientModel);
+
+		ArrayList<Client> clients = DBManager.implement.populateClient();
+
+		for (int i = 0; i < clients.size(); i++) {
+			Object[] temp = {clients.get(i).getCustomer_id(), clients.get(i).getFirstname(), clients.get(i).getSurname(), clients.get(i).getEmail(), clients.get(i).getPhone(), clients.get(i).getAddress(), clients.get(i).getCity(), clients.get(i).getCountry(), clients.get(i).getStore_id(), clients.get(i).isActive()};
+			clientModel.addRow(temp);
+		}
+		System.out.println("yes");
+	}
+
+	/**
+	 * This method is called from within the constructor to initialize the
+	 * form. WARNING: Do NOT modify this code. The content of this method is
+	 * always regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                clientPopupMenu = new javax.swing.JPopupMenu();
+                Update = new javax.swing.JMenuItem();
+                Delete = new javax.swing.JMenuItem();
                 jTabbedPane2 = new javax.swing.JTabbedPane();
                 StaffTab = new javax.swing.JPanel();
                 StaffPanel = new javax.swing.JPanel();
@@ -121,6 +143,25 @@ public class HomePage extends javax.swing.JFrame {
                 ClientsTab = new javax.swing.JPanel();
                 ClientsPanel = new javax.swing.JPanel();
                 jButton1 = new javax.swing.JButton();
+                jScrollPane4 = new javax.swing.JScrollPane();
+                clientTbl = new javax.swing.JTable();
+
+                Update.setText("Update");
+                Update.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                UpdateActionPerformed(evt);
+                        }
+                });
+                clientPopupMenu.add(Update);
+                Update.getAccessibleContext().setAccessibleName("hi");
+
+                Delete.setText("Delete");
+                Delete.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                DeleteActionPerformed(evt);
+                        }
+                });
+                clientPopupMenu.add(Delete);
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setPreferredSize(new java.awt.Dimension(400, 500));
@@ -314,21 +355,49 @@ public class HomePage extends javax.swing.JFrame {
                         }
                 });
 
+                clientTbl.setModel(new javax.swing.table.DefaultTableModel(
+                        new Object [][] {
+                                {},
+                                {},
+                                {},
+                                {}
+                        },
+                        new String [] {
+
+                        }
+                ));
+                clientTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                clientTblMouseClicked(evt);
+                        }
+                        public void mousePressed(java.awt.event.MouseEvent evt) {
+                                clientTblMousePressed(evt);
+                        }
+                        public void mouseReleased(java.awt.event.MouseEvent evt) {
+                                clientTblMouseReleased(evt);
+                        }
+                });
+                jScrollPane4.setViewportView(clientTbl);
+
                 javax.swing.GroupLayout ClientsPanelLayout = new javax.swing.GroupLayout(ClientsPanel);
                 ClientsPanel.setLayout(ClientsPanelLayout);
                 ClientsPanelLayout.setHorizontalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClientsPanelLayout.createSequentialGroup()
-                                .addContainerGap(658, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(145, 145, 145))
+                                .addContainerGap(21, Short.MAX_VALUE)
+                                .addGroup(ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton1))
+                                .addGap(33, 33, 33))
                 );
                 ClientsPanelLayout.setVerticalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(ClientsPanelLayout.createSequentialGroup()
-                                .addGap(165, 165, 165)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton1)
-                                .addContainerGap(192, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(32, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout ClientsTabLayout = new javax.swing.GroupLayout(ClientsTab);
@@ -351,12 +420,12 @@ public class HomePage extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(28, Short.MAX_VALUE))
+                                .addContainerGap(35, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(35, Short.MAX_VALUE)
+                                .addContainerGap(82, Short.MAX_VALUE)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                 );
@@ -365,78 +434,106 @@ public class HomePage extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void filterFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterFldActionPerformed
-            // TODO add your handling code here:
+		// TODO add your handling code here:
         }//GEN-LAST:event_filterFldActionPerformed
 
         private void FilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterBtnActionPerformed
-            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) StaffTbl.getModel()));
-            sorter.setRowFilter(RowFilter.regexFilter(filterFld.getText(), filterComboBox.getSelectedIndex()));
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(((DefaultTableModel) StaffTbl.getModel()));
+		sorter.setRowFilter(RowFilter.regexFilter(filterFld.getText(), filterComboBox.getSelectedIndex()));
 
-            StaffTbl.setRowSorter(sorter);
+		StaffTbl.setRowSorter(sorter);
         }//GEN-LAST:event_FilterBtnActionPerformed
 
         private void clearFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFilterBtnActionPerformed
-            clearFilter();
+		clearFilter();
         }//GEN-LAST:event_clearFilterBtnActionPerformed
 
     private void addFilmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFilmBtnActionPerformed
-        AddFilm newPane = new AddFilm(this);
-        newPane.pack();
-        newPane.setLocationRelativeTo(null);
-        newPane.setSize(950, 500);
-        newPane.setVisible(true);
+	    AddFilm newPane = new AddFilm(this);
+	    newPane.pack();
+	    newPane.setLocationRelativeTo(null);
+	    newPane.setSize(950, 500);
+	    newPane.setVisible(true);
     }//GEN-LAST:event_addFilmBtnActionPerformed
 
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-               ClientPane newPane = new ClientPane();
-        newPane.pack();
-        newPane.setLocationRelativeTo(null);
-        newPane.setSize(750, 500);
-        newPane.setVisible(true);
+		ClientPane newPane = new ClientPane();
+		newPane.pack();
+		newPane.setLocationRelativeTo(null);
+		newPane.setSize(750, 500);
+		newPane.setVisible(true);
         }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        private void clientTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTblMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new HomePage().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+        }//GEN-LAST:event_clientTblMouseClicked
+
+        private void clientTblMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTblMousePressed
+		if (evt.isPopupTrigger()) {
+		}
+        }//GEN-LAST:event_clientTblMousePressed
+
+        private void clientTblMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTblMouseReleased
+		if (evt.isPopupTrigger()) {
+			clientPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+		}
+        }//GEN-LAST:event_clientTblMouseReleased
+
+        private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+		int row = clientTbl.getSelectedRow();
+		String value = clientTbl.getModel().getValueAt(row, 0).toString();
+		System.out.println(value);
+        }//GEN-LAST:event_UpdateActionPerformed
+
+        private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+		int row = clientTbl.getSelectedRow();
+		String value = clientTbl.getModel().getValueAt(row, 0).toString();
+		System.out.println(value);
+        }//GEN-LAST:event_DeleteActionPerformed
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		/* Set the Nimbus look and feel */
+		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+		 */
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(HomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
+		//</editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					new HomePage().setVisible(true);
+				} catch (SQLException ex) {
+					Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		});
+	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
         private javax.swing.JPanel ClientsPanel;
         private javax.swing.JPanel ClientsTab;
+        private javax.swing.JMenuItem Delete;
         private javax.swing.JPanel FilmsPanel;
         private javax.swing.JPanel FilmsTab;
         private javax.swing.JTable FilmsTbl;
@@ -446,8 +543,11 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JPanel StaffPanel;
         private javax.swing.JPanel StaffTab;
         private javax.swing.JTable StaffTbl;
+        private javax.swing.JMenuItem Update;
         private javax.swing.JButton addFilmBtn;
         private javax.swing.JButton clearFilterBtn;
+        private javax.swing.JPopupMenu clientPopupMenu;
+        private javax.swing.JTable clientTbl;
         private javax.swing.JComboBox<String> filterComboBox;
         private javax.swing.JTextField filterFld;
         private javax.swing.JButton jButton1;
@@ -456,7 +556,9 @@ public class HomePage extends javax.swing.JFrame {
         private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JScrollPane jScrollPane2;
         private javax.swing.JScrollPane jScrollPane3;
+        private javax.swing.JScrollPane jScrollPane4;
         private javax.swing.JTabbedPane jTabbedPane2;
         private javax.swing.JTable storeGenreCountTbl;
         // End of variables declaration//GEN-END:variables
+
 }
