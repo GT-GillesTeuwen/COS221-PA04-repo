@@ -359,8 +359,27 @@ public class DBManager {
 				return false;
 			}
 		}
+		public static ArrayList<Store> populateStore() throws SQLException{
+			ArrayList<Store> info = new ArrayList<>();
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try{
+				Statement state = con.createStatement();
+				res = state.executeQuery("select CONCAT(city.city, _utf8mb4',', country.country) AS Store from store \n"
+						+"inner join address on store.address_id=address.address_id \n"
+						+"inner join city on address.city_id=city.city_id \n"
+						+"inner join country on city.country_id=country.country_id");
+			}catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			while(res.next()){
+				Store temp = new Store(res.getString(1));
+				info.add(temp);
+			}
+			return info;
+		}
 
-		
-		//public static boolean removeUser(int customer_ID, )
 	}
 }
