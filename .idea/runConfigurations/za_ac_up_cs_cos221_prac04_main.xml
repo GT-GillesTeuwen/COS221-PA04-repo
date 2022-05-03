@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="main" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="za.ac.up.cs.cos221.prac04.main" type="Application" factoryName="Application" nameIsGenerated="true">
     <envs>
       <env name="SAKILA_DB_HOST" value="41.157.47.27" />
       <env name="SAKILA_DB_NAME" value="u18059288_u21465772_sakila" />
