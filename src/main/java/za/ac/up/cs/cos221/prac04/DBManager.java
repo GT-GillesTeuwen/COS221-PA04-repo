@@ -280,9 +280,43 @@ public class DBManager {
             return info;
         }
 
+        public static boolean removeClient(int customer_ID) throws SQLException{
+            ResultSet res = null;
+            if(con==null){
+                getConnection();
+            }
+            try{
+                PreparedStatement address = con.prepareStatement("SELECT customer.address_id FROM customer WHERE customer.customer_id=?");
+                address.setInt(1, customer_ID);
+                res = address.executeQuery();
+                PreparedStatement state = con.prepareStatement("DELETE FROM customer WHERE customer_id=?");
+                state.setInt(1, customer_ID);
+                state.executeUpdate();
+                state = con.prepareStatement("DELETE FROM address WHERE address.address_id=?");
+                state.setInt(1, res.getInt(1));
+                state.executeUpdate();
+                return true;
+            }catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        }
+        /*public boolean removeAddress(int customer_ID) throws SQLException{
+            ResultSet res = null;
+            if(con==null){
+                getConnection();
+            }try{
+                PreparedStatement address = con.prepareStatement("SELECT customer.address_id FROM customer WHERE customer.customer_id=?");
+                address.setInt(1, customer_ID);
+                res = address.executeQuery();
 
 
-        public static boolean removeUser(int customer_ID, )
+            }catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+
+        }*/
 
     }
 }
