@@ -37,19 +37,25 @@ public class DBManager {
 		private static Connection con;
 		private static boolean hasData = false;
 		private static String bindAddress = "192.168.8.102:3306";
+		private static final String host = System.getenv("SAKILA_DB_HOST");
+		private static final String port = System.getenv("SAKILA_DB_PORT");
+		private static final String db_name = System.getenv("SAKILA_DB_NAME");
+		private static final String protocol = System.getenv("SAKILA_DB_PROTO");
+		private static final String username = System.getenv("SAKILA_DB_USERNAME");
+		private static final String password = System.getenv("SAKILA_DB_PASSWORD");
 
 		public static void setLocal(boolean local) {
 			if (local) {
-				bindAddress = "192.168.8.102:3306/u18059288_u21465772_sakila";
+				bindAddress = "192.168.8.102:3306/"+db_name;
 			} else {
-				bindAddress = "41.157.47.27:3306/u18059288_u21465772_sakila";
+				bindAddress = host+"/"+db_name;
 			}
 		}
 
-		public static boolean testConnection(String username, String password) {
+		public static boolean testConnection() {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://" + bindAddress, username, password);
+				con = DriverManager.getConnection(protocol + bindAddress, username, password);
 				System.out.println("Connected to Server");
 			} catch (ClassNotFoundException ex) {
 
@@ -69,7 +75,7 @@ public class DBManager {
 		public static void getConnection() throws SQLException {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://" + bindAddress, "COS221_PA4", "P@$SW0RD_&");
+				con = DriverManager.getConnection(protocol + bindAddress, username, password);
 				System.out.println("Connected to Server");
 			} catch (ClassNotFoundException ex) {
 

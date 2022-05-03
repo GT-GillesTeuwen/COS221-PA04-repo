@@ -25,7 +25,7 @@ public class DatabaseSelect extends javax.swing.JFrame {
 	}
 
 	private void attempTest() {
-		if (DBManager.implement.testConnection("COS221_PA4", "P@$SW0RD_&")) {
+		if (DBManager.implement.testConnection()){
 			try {
 				feedbackLbl.setText("Connection success");
 				HomePage pane=new HomePage();
