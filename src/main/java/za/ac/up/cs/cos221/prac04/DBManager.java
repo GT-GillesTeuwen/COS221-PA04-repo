@@ -8,6 +8,7 @@ package za.ac.up.cs.cos221.prac04;
 import DataObjects.Film;
 import DataObjects.Language;
 import DataObjects.Staff;
+import DataObjects.StoreGenreCount;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -119,7 +120,7 @@ public class DBManager {
             return info;
         }
 
-        public static boolean insertFilm(String title, String description, int releaseYear, int languageID, int originalLanguageID, 
+        public static boolean insertFilm(String title, String description, int releaseYear, int languageID, int originalLanguageID,
                 int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features) throws SQLException {
             ArrayList<Film> info = new ArrayList<>();
             if (con == null) {
@@ -151,7 +152,7 @@ public class DBManager {
                 return false;
             }
         }
-        
+
         public static ArrayList<Language> populateLanguages() throws SQLException {
             ArrayList<Language> info = new ArrayList<>();
             ResultSet res = null;
@@ -168,6 +169,36 @@ public class DBManager {
             while (res.next()) {
 
                 Language temp = new Language(res.getInt(1), res.getString(2));
+
+                info.add(temp);
+
+            }
+            return info;
+        }
+
+        public static ArrayList<StoreGenreCount> populateStoreGenreCount() throws SQLException {
+            ArrayList<StoreGenreCount> info = new ArrayList<>();
+            ResultSet res = null;
+            if (con == null) {
+                getConnection();
+            }
+            try {
+                Statement state = con.createStatement();
+                res = state.executeQuery("select \n"
+                        + "CONCAT(city.city, _utf8mb4',', country.country) AS Store, category.name, count(*) as NUM \n"
+                        + "from inventory inner join film_category on inventory.film_id=film_category.film_id \n"
+                        + "inner join store on inventory.store_id=store.store_id inner join address on store.address_id = address.address_id \n"
+                        + "inner join city on address.city_id = city.city_id inner join country on city.country_id = country.country_id \n"
+                        + "inner join category on film_category.category_id = category.category_id  \n"
+                        + "group by film_category.category_id, store.store_id\n"
+                        + "Order by Store");
+
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (res.next()) {
+
+                StoreGenreCount temp = new StoreGenreCount(res.getString(1), res.getString(2), res.getInt(3));
 
                 info.add(temp);
 

@@ -27,69 +27,75 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="titleLbl" min="-2" pref="63" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="releaseYearLbl" max="32767" attributes="0"/>
+                                  <Component id="descriptionLbl" max="32767" attributes="0"/>
+                                  <Component id="languageLbl" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="orginalLanguageLbl" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lengthLbl" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ratingLbl" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="titleLbl" min="-2" pref="63" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="releaseYearLbl" max="32767" attributes="0"/>
-                          <Component id="descriptionLbl" max="32767" attributes="0"/>
-                          <Component id="languageLbl" alignment="0" max="32767" attributes="0"/>
-                          <Component id="orginalLanguageLbl" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lengthLbl" alignment="0" max="32767" attributes="0"/>
-                          <Component id="ratingLbl" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane1" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
-                              <Component id="titleFld" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
+                                      <Component id="titleFld" alignment="0" min="-2" pref="224" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="rentalDurationLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="replacementCostLbl" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="rentalRateLbl" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="releaseYearChooser" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="languageComboBox" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="156" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="trailerCheckBox" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                      <Component id="deltedScenesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="rentalDurationLbl" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="replacementCostLbl" alignment="0" max="32767" attributes="0"/>
-                              <Component id="rentalRateLbl" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ratingComboBox" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lengthSpinner" alignment="0" max="32767" attributes="0"/>
+                              <Component id="originalLanguageComboBox" alignment="0" pref="100" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="releaseYearChooser" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                              <Component id="languageComboBox" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="156" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="trailerCheckBox" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <Component id="deltedScenesCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="commentariesCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="behindTheScenesCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="replacementCostSpinner" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="rentalDurationSpinner" alignment="0" max="32767" attributes="0"/>
+                              <Component id="rentalRateSpinner" alignment="0" pref="100" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="ratingComboBox" alignment="0" max="32767" attributes="0"/>
-                      <Component id="lengthSpinner" alignment="0" max="32767" attributes="0"/>
-                      <Component id="originalLanguageComboBox" alignment="0" pref="100" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="commentariesCheckBox" min="-2" max="-2" attributes="0"/>
-                  <Component id="behindTheScenesCheckBox" min="-2" max="-2" attributes="0"/>
-                  <Component id="replacementCostSpinner" min="-2" pref="100" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="445" max="-2" attributes="0"/>
+                      <Component id="addFilmBtn1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="addFilmBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="rentalDurationSpinner" alignment="0" max="32767" attributes="0"/>
-                      <Component id="rentalRateSpinner" alignment="0" pref="100" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="72" max="32767" attributes="0"/>
@@ -160,7 +166,10 @@
                   <Component id="ratingComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="addFilmBtn" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addFilmBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="addFilmBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="58" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -452,6 +461,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addFilmBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="addFilmBtn1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add &amp; Close"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addFilmBtn1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

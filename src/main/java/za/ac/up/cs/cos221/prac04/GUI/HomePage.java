@@ -7,6 +7,7 @@ package za.ac.up.cs.cos221.prac04.GUI;
 
 import DataObjects.Film;
 import DataObjects.Staff;
+import DataObjects.StoreGenreCount;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         refreshStaffTbl();
         refreshFilmTbl();
+        refreshStoreGenreCountTbl();
 
     }
 
@@ -64,13 +66,26 @@ public class HomePage extends javax.swing.JFrame {
         FilmsTbl.setModel(filmTableModel);
 
         ArrayList<Film> films = DBManager.implement.populateFilms();
-        //Staff s1 = new Staff("1", "1", "1", "1", "1", "1", "1", "1", 1, true);
-        //Staff s2 = new Staff("2", "1", "1", "1", "1", "1", "1", "1", 2, true);
-        //ArrayList<Staff> staff = new ArrayList<>();
 
         for (int i = 0; i < films.size(); i++) {
             Object[] temp = {films.get(i).getTitle(), films.get(i).getDescription(), films.get(i).getReleaseYear(), films.get(i).getLength(), films.get(i).getRating()};
             filmTableModel.addRow(temp);
+        }
+    }
+    
+    public void refreshStoreGenreCountTbl() throws SQLException {
+
+        String storeGenreCountCol[] = {"Store Name", "Genre", "Number in stock"};
+
+        DefaultTableModel storeGenreCountModel = new DefaultTableModel(storeGenreCountCol, 0);
+
+        storeGenreCountTbl.setModel(storeGenreCountModel);
+
+        ArrayList<StoreGenreCount> storeGenreCount = DBManager.implement.populateStoreGenreCount();
+
+        for (int i = 0; i < storeGenreCount.size(); i++) {
+            Object[] temp = {storeGenreCount.get(i).getStore(), storeGenreCount.get(i).getGenre(), storeGenreCount.get(i).getNumber()};
+            storeGenreCountModel.addRow(temp);
         }
     }
 
@@ -101,6 +116,8 @@ public class HomePage extends javax.swing.JFrame {
         addFilmBtn = new javax.swing.JButton();
         InventoryTab = new javax.swing.JPanel();
         InventoryPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        storeGenreCountTbl = new javax.swing.JTable();
         ClientsTab = new javax.swing.JPanel();
         ClientsPanel = new javax.swing.JPanel();
 
@@ -244,15 +261,34 @@ public class HomePage extends javax.swing.JFrame {
 
         InventoryPanel.setBackground(new java.awt.Color(255, 255, 51));
 
+        storeGenreCountTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(storeGenreCountTbl);
+
         javax.swing.GroupLayout InventoryPanelLayout = new javax.swing.GroupLayout(InventoryPanel);
         InventoryPanel.setLayout(InventoryPanelLayout);
         InventoryPanelLayout.setHorizontalGroup(
             InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 889, Short.MAX_VALUE)
+            .addGroup(InventoryPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         InventoryPanelLayout.setVerticalGroup(
             InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 381, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryPanelLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout InventoryTabLayout = new javax.swing.GroupLayout(InventoryTab);
@@ -396,6 +432,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable storeGenreCountTbl;
     // End of variables declaration//GEN-END:variables
 }
