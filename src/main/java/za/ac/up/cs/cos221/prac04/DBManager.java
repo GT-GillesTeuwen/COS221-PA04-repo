@@ -323,8 +323,8 @@ public class DBManager {
 			}
 			try {
 				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`customer` "
-						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
-						+ "VALUES (?,?,?,?,?,?);");
+						+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`, 'create_date') "
+						+ "VALUES (?,?,?,?,?,?,?)");
 
 				state.setInt(1, store_id);
 				state.setString(2, firstName);
@@ -332,7 +332,9 @@ public class DBManager {
 				state.setString(4, email);
 				state.setInt(5, addressId);
 				state.setInt(6, active);
-
+				java.util.Date now = new java.util.Date();
+				java.sql.Date curr= new java.sql.Date(now.getDate());
+				state.setDate(7, curr);
 				state.executeUpdate();
 				return true;
 			} catch (SQLException ex) {
