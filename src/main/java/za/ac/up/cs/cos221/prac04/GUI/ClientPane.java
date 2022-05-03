@@ -33,7 +33,7 @@ public class ClientPane extends javax.swing.JFrame {
 	private HomePage homePage;
 
 	public ClientPane(HomePage hp, int id) throws SQLException {
-		
+		this.clientId=id;
 		this.homePage = hp;
 		initComponents();
 		setupCountryComboBox();
