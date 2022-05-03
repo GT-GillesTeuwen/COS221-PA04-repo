@@ -274,10 +274,36 @@ public class DBManager {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			while (res.next()) {
-				Client temp = new Client(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getBoolean(10));
+				Client temp = new Client(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5),
+					res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getBoolean(10));
 				info.add(temp);
 			}
 			return info;
+		}
+
+		public static boolean insertFilm(int store_id, String firstName, String lastName, String email, int addressId, int active) throws SQLException {
+
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`customer` "
+					+ "( `store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
+					+ "VALUES (?,?,?,?,?,?);");
+
+				state.setInt(1, store_id);
+				state.setString(2, firstName);
+				state.setString(2, lastName);
+				state.setString(2, email);
+				state.setInt(5, addressId);
+				state.setInt(6, active);
+
+				state.executeUpdate();
+				return true;
+			} catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
 		}
 
 		public static boolean removeClient(int customer_ID) throws SQLException {
@@ -300,31 +326,8 @@ public class DBManager {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 				return false;
 			}
-		}
-		/*public boolean removeAddress(int customer_ID) throws SQLException{
-            ResultSet res = null;
-            if(con==null){
-                getConnection();
-            }try{
-                PreparedStatement address = con.prepareStatement("SELECT customer.address_id FROM customer WHERE customer.customer_id=?");
-                address.setInt(1, customer_ID);
-                res = address.executeQuery();
 
-				state.setInt(1, storeId);
-				state.setString(2, firstName);
-				state.setString(3, lastName);
-				state.setString(4, email);
-				state.setInt(5, addressId);
-				state.setInt(6, active);
-
-				state.executeUpdate();
-				return true;
-			} catch (SQLException ex) {
-				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
-				return false;
-			}
-		}*/
-
+		
 		//public static boolean removeUser(int customer_ID, )
 	}
-}
+		 }
