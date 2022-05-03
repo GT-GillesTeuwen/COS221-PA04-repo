@@ -280,17 +280,35 @@ public class DBManager {
 			return info;
 		}
 
-		public static boolean insertClient(int storeId, String firstName, String lastName, String email, int addressId, int active) throws SQLException {
-			
+		public static boolean removeClient(int customer_ID) throws SQLException {
+			ResultSet res = null;
 			if (con == null) {
 				getConnection();
 			}
 			try {
-				PreparedStatement state = con.prepareStatement("INSERT INTO "
-					+ "`u18059288_u21465772_sakila`.`customer` "
-					+ "(`store_id`, `first_name`, `last_name`, `email`, `address_id`, `active`) "
-					+ "VALUES "
-					+ "(?, ?, ?, ?, ?, ?);");
+				PreparedStatement address = con.prepareStatement("SELECT customer.address_id FROM customer WHERE customer.customer_id=?");
+				address.setInt(1, customer_ID);
+				res = address.executeQuery();
+				PreparedStatement state = con.prepareStatement("DELETE FROM customer WHERE customer_id=?");
+				state.setInt(1, customer_ID);
+				state.executeUpdate();
+				state = con.prepareStatement("DELETE FROM address WHERE address.address_id=?");
+				state.setInt(1, res.getInt(1));
+				state.executeUpdate();
+				return true;
+			} catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
+		}
+		/*public boolean removeAddress(int customer_ID) throws SQLException{
+            ResultSet res = null;
+            if(con==null){
+                getConnection();
+            }try{
+                PreparedStatement address = con.prepareStatement("SELECT customer.address_id FROM customer WHERE customer.customer_id=?");
+                address.setInt(1, customer_ID);
+                res = address.executeQuery();
 
 				state.setInt(1, storeId);
 				state.setString(2, firstName);
@@ -305,9 +323,7 @@ public class DBManager {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 				return false;
 			}
-		}
-		
-		
+		}*/
 
 		//public static boolean removeUser(int customer_ID, )
 	}
