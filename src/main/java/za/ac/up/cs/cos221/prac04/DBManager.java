@@ -8,6 +8,7 @@ package za.ac.up.cs.cos221.prac04;
 import DataObjects.Film;
 import DataObjects.Language;
 import DataObjects.Staff;
+import DataObjects.Client;
 import DataObjects.StoreGenreCount;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,8 +19,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+//import javafx.collections.FXCollections;
+//import javafx.collections.ObservableList;
 
 /**
  *
@@ -205,6 +206,32 @@ public class DBManager {
             }
             return info;
         }
+
+        public static ArrayList<Client> populateClient() throws SQLException{
+            ArrayList<Client> info = new ArrayList<>();
+            ResultSet res = null;
+            if(con==null){
+                getConnection();
+            }
+            try {
+                Statement state = con.createStatement();
+                res = state.executeQuery("select customer.customer_id, customer.first_name, customer.last_name, customer.email, \n"
+                        +"address.phone, address.address, city.city, country.country, customer.store_id, customer.active \n"
+                        +"from customer inner join address on customer.address_id=address.address_id \n"
+                        +"inner join city on address.city_id=city.city_id \n"
+                        +"inner join country on city.country_id=country.country_id \n"
+                        +"order by customer.store_id");
+            }catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            while (res.next()){
+                Client temp = new Client(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getBoolean(10));
+                info.add(temp);
+            }
+            return info;
+        }
+
+        public static boolean removeUser(int customer_ID, )
 
     }
 }

@@ -21,6 +21,14 @@
                 <upNumber>u21465772</upNumber>
             </properties>
         </developer>
+        <developer>
+            <id>ThemDankMemes</id>
+            <name>Duval van der Vyver</name>
+            <email>u18059288@tuks.co.za</email>
+            <properties>
+                <upNumber>U18059288</upNumber>
+            </properties>
+        </developer>
         
     </developers>
     <repositories>
