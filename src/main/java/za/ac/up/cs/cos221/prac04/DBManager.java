@@ -12,7 +12,9 @@ import DataObjects.Language;
 import DataObjects.Staff;
 import DataObjects.Store;
 import DataObjects.Client;
+import DataObjects.ClientAddress;
 import DataObjects.StoreGenreCount;
+import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -351,6 +353,7 @@ public class DBManager {
 				state.setInt(1, customer_ID);
 				state.executeUpdate();
 				state = con.prepareStatement("DELETE FROM address WHERE address.address_id=?");
+				res.next();
 				state.setInt(1, res.getInt(1));
 				state.executeUpdate();
 				return true;
@@ -367,7 +370,7 @@ public class DBManager {
 			}
 			try{
 				Statement state = con.createStatement();
-				res = state.executeQuery("select CONCAT(city.city, _utf8mb4',', country.country) AS Store from store \n"
+				res = state.executeQuery("select CONCAT(city.city, _utf8mb4',', country.country) AS Store,store_id from store \n"
 						+"inner join address on store.address_id=address.address_id \n"
 						+"inner join city on address.city_id=city.city_id \n"
 						+"inner join country on city.country_id=country.country_id");
@@ -375,29 +378,28 @@ public class DBManager {
 				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			while(res.next()){
-				Store temp = new Store(res.getString(1));
+				Store temp = new Store(res.getString(1),res.getInt(2));
 				info.add(temp);
 			}
 			return info;
 		}
-		public static boolean updateAddress(int customer_id, String add1, String add2, String district, String phone, int city_id) throws SQLException{
+		
+		public static boolean updateAddress(int address_id, String add1, String add2, String district, String phone, String postalCode,int city_id) throws SQLException{
 			ResultSet res = null;
 			if (con == null) {
 				getConnection();
 			}
 			try {
-				PreparedStatement address = con.prepareStatement("select address.address_id from address \n"
-						+"inner join customer on customer.address_id=address.address_id where customer.customer_id=?");
-				address.setInt(1, customer_id);
-				res = address.executeQuery();
+				
 				PreparedStatement state = con.prepareStatement("update address set address=?, address2=?, district=?, \n"
-						+"phone=?, city_id=? where address.address_id=?");
+						+"phone=?, city_id=? ,postal_code=? where address.address_id=?");
 				state.setString(1, add1);
 				state.setString(2, add2);
 				state.setString(3, district);
 				state.setString(4, phone);
 				state.setInt(5, city_id);
-				state.setInt(6, res.getInt(1));
+				state.setInt(6, address_id);
+				state.setString(7, postalCode);
 				state.executeUpdate();
 				return true;
 			}
@@ -406,6 +408,58 @@ public class DBManager {
 				return false;
 			}
 
+		}
+		
+		public static boolean upadateClient(int customer_id,int store_id, String firstName, String lastName, String email, int active) throws SQLException{
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				
+				PreparedStatement state = con.prepareStatement("update customer set first_name=?, last_name=?, email=?, \n"
+						+" active=?, store_id=? where customer_id=?");
+				state.setString(1, firstName);
+				state.setString(2, lastName);
+				state.setString(3, email);
+				state.setInt(4, active);
+				state.setInt(5, store_id);
+				state.setInt(6, customer_id);
+				state.executeUpdate();
+				return true;
+			}
+			catch (SQLException ex){
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return false;
+			}
+		}
+		
+		public static ClientAddress getClient(int id) throws SQLException {
+			ArrayList<Client> info = new ArrayList<>();
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				PreparedStatement state = con.prepareStatement("select customer.customer_id, customer.first_name, customer.last_name, customer.email,address.address_id,\n" +
+"						address.phone, address.address,address.postal_code, city.city_id, country.country_id, customer.store_id, customer.active,address.district\n" +
+"						from customer inner join address on customer.address_id=address.address_id\n" +
+"						inner join city on address.city_id=city.city_id \n" +
+"						inner join country on city.country_id=country.country_id \n" +
+"						where customer_id=?\n" +
+"						order by customer.store_id");
+				state.setInt(1, id);
+				res = state.executeQuery();
+			} catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			while (res.next()) {
+				ClientAddress temp=new ClientAddress(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getInt(5), 
+					res.getString(6), res.getString(7), res.getString(8), res.getInt(9), res.getInt(10), res.getInt(11), res.getInt(12),res.getString(13));
+					
+				return temp;
+			}
+			return null;
 		}
 
 	}

@@ -33,7 +33,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="addClientBtn" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="addClientBtn" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
@@ -41,14 +45,14 @@
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Component id="storeLbl" min="-2" pref="63" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="storeComboBox" min="-2" pref="111" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="ActiveCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <Component id="storeComboBox" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="activeCheckBox" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="firstNameLbl" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="titleFld" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <Component id="firstNameFld" min="-2" pref="224" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -57,12 +61,12 @@
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="emailLbl" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="titleFld2" min="-2" pref="224" max="-2" attributes="0"/>
+                                      <Component id="emailFld" min="-2" pref="224" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="firstNameLbl1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="titleFld1" min="-2" pref="224" max="-2" attributes="0"/>
+                                      <Component id="lastnameFld" min="-2" pref="224" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -76,8 +80,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="titleFld4" min="-2" pref="224" max="-2" attributes="0"/>
-                                  <Component id="titleFld3" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="streetFld" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <Component id="streetNumFld" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -89,8 +93,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="titleFld5" min="-2" pref="224" max="-2" attributes="0"/>
-                                  <Component id="titleFld6" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="districtFld" min="-2" pref="224" max="-2" attributes="0"/>
+                                  <Component id="postalCodeFld" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="countryComboBox" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                   <Component id="cityComboBox" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
@@ -98,7 +102,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="emailLbl5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="titleFld7" min="-2" pref="224" max="-2" attributes="0"/>
+                              <Component id="phoneFld" min="-2" pref="224" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -116,22 +120,22 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="storeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="storeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ActiveCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="activeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="firstNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="titleFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="firstNameFld" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="titleFld1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lastnameFld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="firstNameLbl1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="emailLbl" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="titleFld2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="emailFld" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -146,33 +150,36 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="titleFld6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="postalCodeFld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="emailLbl4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="titleFld5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="districtFld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="emailLbl3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="titleFld4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="streetFld" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="emailLbl2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="titleFld3" min="-2" max="-2" attributes="0"/>
+                          <Component id="streetNumFld" min="-2" max="-2" attributes="0"/>
                           <Component id="emailLbl1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="titleFld7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="phoneFld" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="emailLbl5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="addClientBtn" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addClientBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -194,7 +201,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Store&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="storeLbl">
@@ -219,21 +226,21 @@
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld">
+    <Component class="javax.swing.JTextField" name="firstNameFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld1">
+    <Component class="javax.swing.JTextField" name="lastnameFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld2">
+    <Component class="javax.swing.JTextField" name="emailFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
@@ -251,7 +258,7 @@
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="ActiveCheckBox">
+    <Component class="javax.swing.JCheckBox" name="activeCheckBox">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
@@ -270,21 +277,21 @@
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld3">
+    <Component class="javax.swing.JTextField" name="streetNumFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld4">
+    <Component class="javax.swing.JTextField" name="streetFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFld4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="streetFldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="emailLbl2">
@@ -309,14 +316,14 @@
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld5">
+    <Component class="javax.swing.JTextField" name="districtFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFld5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="districtFldActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="emailLbl4">
@@ -330,17 +337,17 @@
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld6">
+    <Component class="javax.swing.JTextField" name="postalCodeFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleFld6ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postalCodeFldActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="titleFld7">
+    <Component class="javax.swing.JTextField" name="phoneFld">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
@@ -410,6 +417,14 @@
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

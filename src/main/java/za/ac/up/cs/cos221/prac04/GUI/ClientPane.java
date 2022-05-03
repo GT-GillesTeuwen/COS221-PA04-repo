@@ -6,6 +6,7 @@
 package za.ac.up.cs.cos221.prac04.GUI;
 
 import DataObjects.City;
+import DataObjects.ClientAddress;
 import DataObjects.Country;
 import DataObjects.Store;
 import java.awt.event.ItemEvent;
@@ -27,21 +28,71 @@ public class ClientPane extends javax.swing.JFrame {
 	/**
 	 * Creates new form ClientPane
 	 */
+	private ClientAddress clientAddress;
 	private int clientId = -1;
 	private HomePage homePage;
-	public ClientPane(HomePage hp,int id) {
-		this.homePage=hp;
-		this.clientId = id;
-		initComponents();
+
+	public ClientPane(HomePage hp, int id) throws SQLException {
 		
+		this.homePage = hp;
+		initComponents();
+		setupCountryComboBox();
+		setupStoreComboBox();
+		addClientBtn.setText("Update");
+		ClientAddress ca = DBManager.implement.getClient(id);
+		this.clientAddress = ca;
+		boolean found = false;
+		int i = 0;
+		while (!found) {
+			if (countryComboBox.getItemAt(i).getId() == ca.getCountryId()) {
+				countryComboBox.setSelectedIndex(i);
+				found = true;
+			}
+			i++;
+		}
+
+		found = false;
+		i = 0;
+		while (!found) {
+			if (cityComboBox.getItemAt(i).getCityId() == ca.getCityId()) {
+				cityComboBox.setSelectedIndex(i);
+				found = true;
+			}
+			i++;
+		}
+
+		found = false;
+		i = 0;
+		while (!found) {
+			if (storeComboBox.getItemAt(i).getId() == ca.getStoreId()) {
+				storeComboBox.setSelectedIndex(i);
+				found = true;
+			}
+			i++;
+		}
+
+		if (ca.getActive() == 1) {
+			activeCheckBox.setSelected(true);
+		}
+
+		firstNameFld.setText(ca.getFirstName());
+		lastnameFld.setText(ca.getLastName());
+		emailFld.setText(ca.getEmail());
+		postalCodeFld.setText(ca.getPostalCode());
+		districtFld.setText(ca.getDistrict());
+		streetFld.setText(ca.getStreet());
+		streetNumFld.setText(ca.getStreetNumber());
+		phoneFld.setText(ca.getPhone());
+
 	}
-	
-	public ClientPane() {
+
+	public ClientPane(HomePage hp) {
+		this.homePage = hp;
 		initComponents();
 		setupCountryComboBox();
 		setupStoreComboBox();
 	}
-	
+
 	private void setupCountryComboBox() {
 		try {
 			ArrayList<Country> allCountry = DBManager.implement.populateCountries();
@@ -60,7 +111,7 @@ public class ClientPane extends javax.swing.JFrame {
 			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+
 	private void setupCityComboBox(int countryId) {
 		try {
 			cityComboBox.removeAllItems();
@@ -72,17 +123,18 @@ public class ClientPane extends javax.swing.JFrame {
 			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-    private void setupStoreComboBox(){
-        try{
-            storeComboBox.removeAllItems();
-            ArrayList<Store> allStores = DBManager.implement.populateStore();
-            for (int i =0; i<allStores.size(); i++){
-                storeComboBox.addItem(allStores.get(i).getStore());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+
+	private void setupStoreComboBox() {
+		try {
+			storeComboBox.removeAllItems();
+			ArrayList<Store> allStores = DBManager.implement.populateStore();
+			for (int i = 0; i < allStores.size(); i++) {
+				storeComboBox.addItem(allStores.get(i));
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -98,26 +150,27 @@ public class ClientPane extends javax.swing.JFrame {
                 storeComboBox = new javax.swing.JComboBox<>();
                 storeLbl = new javax.swing.JLabel();
                 firstNameLbl = new javax.swing.JLabel();
-                titleFld = new javax.swing.JTextField();
-                titleFld1 = new javax.swing.JTextField();
-                titleFld2 = new javax.swing.JTextField();
+                firstNameFld = new javax.swing.JTextField();
+                lastnameFld = new javax.swing.JTextField();
+                emailFld = new javax.swing.JTextField();
                 emailLbl = new javax.swing.JLabel();
-                ActiveCheckBox = new javax.swing.JCheckBox();
+                activeCheckBox = new javax.swing.JCheckBox();
                 emailLbl1 = new javax.swing.JLabel();
-                titleFld3 = new javax.swing.JTextField();
-                titleFld4 = new javax.swing.JTextField();
+                streetNumFld = new javax.swing.JTextField();
+                streetFld = new javax.swing.JTextField();
                 emailLbl2 = new javax.swing.JLabel();
                 emailLbl3 = new javax.swing.JLabel();
-                titleFld5 = new javax.swing.JTextField();
+                districtFld = new javax.swing.JTextField();
                 emailLbl4 = new javax.swing.JLabel();
-                titleFld6 = new javax.swing.JTextField();
-                titleFld7 = new javax.swing.JTextField();
+                postalCodeFld = new javax.swing.JTextField();
+                phoneFld = new javax.swing.JTextField();
                 emailLbl5 = new javax.swing.JLabel();
                 emailLbl6 = new javax.swing.JLabel();
                 emailLbl7 = new javax.swing.JLabel();
                 countryComboBox = new javax.swing.JComboBox<>();
                 cityComboBox = new javax.swing.JComboBox<>();
                 firstNameLbl1 = new javax.swing.JLabel();
+                jButton1 = new javax.swing.JButton();
 
                 jLabel1.setText("jLabel1");
 
@@ -142,11 +195,11 @@ public class ClientPane extends javax.swing.JFrame {
                 firstNameLbl.setFocusable(false);
                 firstNameLbl.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-                titleFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                firstNameFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-                titleFld1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                lastnameFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-                titleFld2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                emailFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
                 emailLbl.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
                 emailLbl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -154,8 +207,8 @@ public class ClientPane extends javax.swing.JFrame {
                 emailLbl.setFocusable(false);
                 emailLbl.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-                ActiveCheckBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                ActiveCheckBox.setText("Active");
+                activeCheckBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                activeCheckBox.setText("Active");
 
                 emailLbl1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
                 emailLbl1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -163,12 +216,12 @@ public class ClientPane extends javax.swing.JFrame {
                 emailLbl1.setFocusable(false);
                 emailLbl1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-                titleFld3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                streetNumFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-                titleFld4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                titleFld4.addActionListener(new java.awt.event.ActionListener() {
+                streetFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                streetFld.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                titleFld4ActionPerformed(evt);
+                                streetFldActionPerformed(evt);
                         }
                 });
 
@@ -184,10 +237,10 @@ public class ClientPane extends javax.swing.JFrame {
                 emailLbl3.setFocusable(false);
                 emailLbl3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-                titleFld5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                titleFld5.addActionListener(new java.awt.event.ActionListener() {
+                districtFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                districtFld.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                titleFld5ActionPerformed(evt);
+                                districtFldActionPerformed(evt);
                         }
                 });
 
@@ -197,14 +250,14 @@ public class ClientPane extends javax.swing.JFrame {
                 emailLbl4.setFocusable(false);
                 emailLbl4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-                titleFld6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-                titleFld6.addActionListener(new java.awt.event.ActionListener() {
+                postalCodeFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                postalCodeFld.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                titleFld6ActionPerformed(evt);
+                                postalCodeFldActionPerformed(evt);
                         }
                 });
 
-                titleFld7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                phoneFld.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
                 emailLbl5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
                 emailLbl5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -230,6 +283,13 @@ public class ClientPane extends javax.swing.JFrame {
                 firstNameLbl1.setFocusable(false);
                 firstNameLbl1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
+                jButton1.setText("Close");
+                jButton1.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jButton1ActionPerformed(evt);
+                        }
+                });
+
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
@@ -237,7 +297,10 @@ public class ClientPane extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(addClientBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jButton1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(addClientBtn))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -245,24 +308,24 @@ public class ClientPane extends javax.swing.JFrame {
                                                                         .addGap(9, 9, 9)
                                                                         .addComponent(storeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                        .addComponent(ActiveCheckBox))
+                                                                        .addComponent(storeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(activeCheckBox))
                                                                 .addGroup(layout.createSequentialGroup()
                                                                         .addComponent(firstNameLbl)
                                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                        .addComponent(titleFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(firstNameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                                 .addGap(1, 1, 1)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                                                 .addComponent(emailLbl)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(titleFld2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(emailFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                                                 .addComponent(firstNameLbl1)
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(titleFld1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                                                .addComponent(lastnameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addGroup(layout.createSequentialGroup()
@@ -271,8 +334,8 @@ public class ClientPane extends javax.swing.JFrame {
                                                                         .addComponent(emailLbl2))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(titleFld4, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(titleFld3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(streetFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(streetNumFld, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                                         .addComponent(emailLbl4)
@@ -281,14 +344,14 @@ public class ClientPane extends javax.swing.JFrame {
                                                                         .addComponent(emailLbl7))
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                        .addComponent(titleFld5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(titleFld6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(districtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(postalCodeFld, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(countryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(cityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addComponent(emailLbl5)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(titleFld7, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                                .addComponent(phoneFld, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addContainerGap(15, Short.MAX_VALUE))
                 );
                 layout.setVerticalGroup(
@@ -300,19 +363,19 @@ public class ClientPane extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(storeLbl)
-                                                        .addComponent(ActiveCheckBox))
+                                                        .addComponent(activeCheckBox))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(firstNameLbl)
-                                                        .addComponent(titleFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(firstNameFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(titleFld1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lastnameFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(firstNameLbl1))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(emailLbl)
-                                                        .addComponent(titleFld2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addComponent(emailFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(emailLbl6)
@@ -323,26 +386,28 @@ public class ClientPane extends javax.swing.JFrame {
                                                         .addComponent(cityComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(titleFld6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(postalCodeFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(emailLbl4))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(titleFld5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(districtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(emailLbl3))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(titleFld4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(streetFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(emailLbl2))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(titleFld3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(streetNumFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(emailLbl1))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(titleFld7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(phoneFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(emailLbl5))))
                                 .addGap(36, 36, 36)
-                                .addComponent(addClientBtn)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(addClientBtn)
+                                        .addComponent(jButton1))
                                 .addContainerGap(20, Short.MAX_VALUE))
                 );
 
@@ -351,31 +416,57 @@ public class ClientPane extends javax.swing.JFrame {
 
         private void addClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClientBtnActionPerformed
 		if (clientId == -1) {
-			
+			try {
+				int active = 0;
+				if (activeCheckBox.isSelected()) {
+					active = 1;
+				}
+				int addressID = DBManager.implement.insertAddress(streetNumFld.getText() + " " + streetFld.getText(), "", districtFld.getText(),
+					((City) cityComboBox.getSelectedItem()).getCityId(), postalCodeFld.getText(), phoneFld.getText());
+				DBManager.implement.insertClient(((Store) storeComboBox.getSelectedItem()).getId(), firstNameFld.getText(), lastnameFld.getText(),
+					emailFld.getText(), addressID, active);
+			} catch (SQLException ex) {
+				Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		} else {
-			
+			try {
+				int active = 0;
+				if (activeCheckBox.isSelected()) {
+					active = 1;
+				}
+				DBManager.implement.updateAddress(clientAddress.getAddressId(), streetNumFld.getText() + " " + streetFld.getText(), "", districtFld.getText(),
+					phoneFld.getText(), postalCodeFld.getText(), ((City) cityComboBox.getSelectedItem()).getCityId());
+				DBManager.implement.upadateClient(clientAddress.getClientId(), ((Store) storeComboBox.getSelectedItem()).getId(), firstNameFld.getText(), 
+					lastnameFld.getText(),emailFld.getText(), active);
+
+			} catch (SQLException ex) {
+				Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
-		
-		
+
 		try {
 			homePage.refreshClientTbl();
 		} catch (SQLException ex) {
 			Logger.getLogger(ClientPane.class.getName()).log(Level.SEVERE, null, ex);
 		}
-			
+
         }//GEN-LAST:event_addClientBtnActionPerformed
 
-        private void titleFld4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFld4ActionPerformed
+        private void streetFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_streetFldActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_titleFld4ActionPerformed
+        }//GEN-LAST:event_streetFldActionPerformed
 
-        private void titleFld5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFld5ActionPerformed
+        private void districtFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_districtFldActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_titleFld5ActionPerformed
+        }//GEN-LAST:event_districtFldActionPerformed
 
-        private void titleFld6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleFld6ActionPerformed
+        private void postalCodeFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postalCodeFldActionPerformed
 		// TODO add your handling code here:
-        }//GEN-LAST:event_titleFld6ActionPerformed
+        }//GEN-LAST:event_postalCodeFldActionPerformed
+
+        private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		this.dispose();
+        }//GEN-LAST:event_jButton1ActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -407,16 +498,18 @@ public class ClientPane extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new ClientPane().setVisible(true);
+				new ClientPane(null).setVisible(true);
 			}
 		});
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JCheckBox ActiveCheckBox;
+        private javax.swing.JCheckBox activeCheckBox;
         private javax.swing.JButton addClientBtn;
         private javax.swing.JComboBox<City> cityComboBox;
         private javax.swing.JComboBox<Country> countryComboBox;
+        private javax.swing.JTextField districtFld;
+        private javax.swing.JTextField emailFld;
         private javax.swing.JLabel emailLbl;
         private javax.swing.JLabel emailLbl1;
         private javax.swing.JLabel emailLbl2;
@@ -425,18 +518,17 @@ public class ClientPane extends javax.swing.JFrame {
         private javax.swing.JLabel emailLbl5;
         private javax.swing.JLabel emailLbl6;
         private javax.swing.JLabel emailLbl7;
+        private javax.swing.JTextField firstNameFld;
         private javax.swing.JLabel firstNameLbl;
         private javax.swing.JLabel firstNameLbl1;
+        private javax.swing.JButton jButton1;
         private javax.swing.JLabel jLabel1;
-        private javax.swing.JComboBox<String> storeComboBox;
+        private javax.swing.JTextField lastnameFld;
+        private javax.swing.JTextField phoneFld;
+        private javax.swing.JTextField postalCodeFld;
+        private javax.swing.JComboBox<Store> storeComboBox;
         private javax.swing.JLabel storeLbl;
-        private javax.swing.JTextField titleFld;
-        private javax.swing.JTextField titleFld1;
-        private javax.swing.JTextField titleFld2;
-        private javax.swing.JTextField titleFld3;
-        private javax.swing.JTextField titleFld4;
-        private javax.swing.JTextField titleFld5;
-        private javax.swing.JTextField titleFld6;
-        private javax.swing.JTextField titleFld7;
+        private javax.swing.JTextField streetFld;
+        private javax.swing.JTextField streetNumFld;
         // End of variables declaration//GEN-END:variables
 }

@@ -166,10 +166,14 @@ public class HomePage extends javax.swing.JFrame {
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setPreferredSize(new java.awt.Dimension(400, 500));
 
+                jTabbedPane2.setBackground(new java.awt.Color(26, 32, 40));
+                jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
                 jTabbedPane2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-                StaffPanel.setBackground(new java.awt.Color(255, 51, 51));
+                StaffPanel.setBackground(new java.awt.Color(49, 66, 82));
 
+                StaffTbl.setBackground(new java.awt.Color(26, 32, 40));
+                StaffTbl.setForeground(new java.awt.Color(255, 255, 255));
                 jScrollPane1.setViewportView(StaffTbl);
 
                 filterFld.addActionListener(new java.awt.event.ActionListener() {
@@ -178,10 +182,17 @@ public class HomePage extends javax.swing.JFrame {
                         }
                 });
 
+                jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                jLabel1.setForeground(new java.awt.Color(255, 255, 255));
                 jLabel1.setText("Filter by");
 
+                jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                jLabel2.setForeground(new java.awt.Color(255, 255, 255));
                 jLabel2.setText("like");
 
+                FilterBtn.setBackground(new java.awt.Color(206, 120, 1));
+                FilterBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                FilterBtn.setForeground(new java.awt.Color(255, 255, 255));
                 FilterBtn.setText("Filter");
                 FilterBtn.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,6 +200,9 @@ public class HomePage extends javax.swing.JFrame {
                         }
                 });
 
+                clearFilterBtn.setBackground(new java.awt.Color(206, 120, 1));
+                clearFilterBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                clearFilterBtn.setForeground(new java.awt.Color(255, 255, 255));
                 clearFilterBtn.setText("Clear Filter");
                 clearFilterBtn.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,17 +213,13 @@ public class HomePage extends javax.swing.JFrame {
                 javax.swing.GroupLayout StaffPanelLayout = new javax.swing.GroupLayout(StaffPanel);
                 StaffPanel.setLayout(StaffPanelLayout);
                 StaffPanelLayout.setHorizontalGroup(
-                        StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(StaffPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jScrollPane1)
-                                .addContainerGap())
+                        StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(StaffPanelLayout.createSequentialGroup()
                                 .addGap(127, 127, 127)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
+                                .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(filterFld, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,7 +227,11 @@ public class HomePage extends javax.swing.JFrame {
                                 .addComponent(FilterBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(clearFilterBtn)
-                                .addContainerGap(323, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(StaffPanelLayout.createSequentialGroup()
+                                .addContainerGap(21, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))
                 );
                 StaffPanelLayout.setVerticalGroup(
                         StaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,8 +245,8 @@ public class HomePage extends javax.swing.JFrame {
                                         .addComponent(FilterBtn)
                                         .addComponent(clearFilterBtn))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(20, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(28, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout StaffTabLayout = new javax.swing.GroupLayout(StaffTab);
@@ -250,10 +264,15 @@ public class HomePage extends javax.swing.JFrame {
 
                 jTabbedPane2.addTab("Staff", StaffTab);
 
-                FilmsPanel.setBackground(new java.awt.Color(255, 153, 51));
+                FilmsPanel.setBackground(new java.awt.Color(49, 66, 82));
 
+                FilmsTbl.setBackground(new java.awt.Color(26, 32, 40));
+                FilmsTbl.setForeground(new java.awt.Color(255, 255, 255));
                 jScrollPane2.setViewportView(FilmsTbl);
 
+                addFilmBtn.setBackground(new java.awt.Color(206, 120, 1));
+                addFilmBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                addFilmBtn.setForeground(new java.awt.Color(255, 255, 255));
                 addFilmBtn.setText("Add Film");
                 addFilmBtn.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,26 +285,26 @@ public class HomePage extends javax.swing.JFrame {
                 FilmsPanelLayout.setHorizontalGroup(
                         FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FilmsPanelLayout.createSequentialGroup()
-                                .addContainerGap(745, Short.MAX_VALUE)
+                                .addContainerGap(840, Short.MAX_VALUE)
                                 .addComponent(addFilmBtn)
-                                .addGap(66, 66, 66))
+                                .addGap(30, 30, 30))
                         .addGroup(FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(FilmsPanelLayout.createSequentialGroup()
                                         .addGap(16, 16, 16)
-                                        .addComponent(jScrollPane2)
-                                        .addGap(17, 17, 17)))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(16, Short.MAX_VALUE)))
                 );
                 FilmsPanelLayout.setVerticalGroup(
                         FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(FilmsPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
+                                .addGap(18, 18, 18)
                                 .addComponent(addFilmBtn)
-                                .addContainerGap(336, Short.MAX_VALUE))
+                                .addContainerGap(413, Short.MAX_VALUE))
                         .addGroup(FilmsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(FilmsPanelLayout.createSequentialGroup()
                                         .addGap(63, 63, 63)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(40, Short.MAX_VALUE)))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(31, Short.MAX_VALUE)))
                 );
 
                 javax.swing.GroupLayout FilmsTabLayout = new javax.swing.GroupLayout(FilmsTab);
@@ -301,8 +320,10 @@ public class HomePage extends javax.swing.JFrame {
 
                 jTabbedPane2.addTab("Films", FilmsTab);
 
-                InventoryPanel.setBackground(new java.awt.Color(255, 255, 51));
+                InventoryPanel.setBackground(new java.awt.Color(49, 66, 82));
 
+                storeGenreCountTbl.setBackground(new java.awt.Color(26, 32, 40));
+                storeGenreCountTbl.setForeground(new java.awt.Color(255, 255, 255));
                 storeGenreCountTbl.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {},
@@ -322,14 +343,14 @@ public class HomePage extends javax.swing.JFrame {
                         InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(InventoryPanelLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(31, Short.MAX_VALUE))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(18, Short.MAX_VALUE))
                 );
                 InventoryPanelLayout.setVerticalGroup(
                         InventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InventoryPanelLayout.createSequentialGroup()
-                                .addContainerGap(63, Short.MAX_VALUE)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(74, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32))
                 );
 
@@ -346,8 +367,11 @@ public class HomePage extends javax.swing.JFrame {
 
                 jTabbedPane2.addTab("Inventory", InventoryTab);
 
-                ClientsPanel.setBackground(new java.awt.Color(0, 204, 0));
+                ClientsPanel.setBackground(new java.awt.Color(49, 66, 82));
 
+                jButton1.setBackground(new java.awt.Color(206, 120, 1));
+                jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+                jButton1.setForeground(new java.awt.Color(255, 255, 255));
                 jButton1.setText("Add Client");
                 jButton1.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,6 +379,8 @@ public class HomePage extends javax.swing.JFrame {
                         }
                 });
 
+                clientTbl.setBackground(new java.awt.Color(26, 32, 40));
+                clientTbl.setForeground(new java.awt.Color(255, 255, 255));
                 clientTbl.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
                                 {},
@@ -384,9 +410,9 @@ public class HomePage extends javax.swing.JFrame {
                 ClientsPanelLayout.setHorizontalGroup(
                         ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClientsPanelLayout.createSequentialGroup()
-                                .addContainerGap(21, Short.MAX_VALUE)
+                                .addContainerGap(16, Short.MAX_VALUE)
                                 .addGroup(ClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButton1))
                                 .addGap(33, 33, 33))
                 );
@@ -396,8 +422,8 @@ public class HomePage extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(28, Short.MAX_VALUE))
                 );
 
                 javax.swing.GroupLayout ClientsTabLayout = new javax.swing.GroupLayout(ClientsTab);
@@ -417,17 +443,11 @@ public class HomePage extends javax.swing.JFrame {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(35, Short.MAX_VALUE))
+                        .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(82, Short.MAX_VALUE)
-                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                        .addComponent(jTabbedPane2)
                 );
 
                 pack();
@@ -457,7 +477,7 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_addFilmBtnActionPerformed
 
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		ClientPane newPane = new ClientPane();
+		ClientPane newPane = new ClientPane(this);
 		newPane.pack();
 		newPane.setLocationRelativeTo(null);
 		newPane.setSize(750, 500);
@@ -483,12 +503,25 @@ public class HomePage extends javax.swing.JFrame {
 		int row = clientTbl.getSelectedRow();
 		String value = clientTbl.getModel().getValueAt(row, 0).toString();
 		System.out.println(value);
+		try {
+			ClientPane cp=new ClientPane(this,Integer.parseInt(value));
+			cp.pack();
+		cp.setLocationRelativeTo(null);
+		cp.setSize(750, 500);
+		cp.setVisible(true);
+		} catch (SQLException ex) {
+			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+		}
         }//GEN-LAST:event_UpdateActionPerformed
 
         private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
-		int row = clientTbl.getSelectedRow();
-		String value = clientTbl.getModel().getValueAt(row, 0).toString();
-		System.out.println(value);
+		try {
+			int row = clientTbl.getSelectedRow();
+			String value = clientTbl.getModel().getValueAt(row, 0).toString();
+			DBManager.implement.removeClient(Integer.parseInt(value));
+		} catch (SQLException ex) {
+			Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+		}
         }//GEN-LAST:event_DeleteActionPerformed
 
 	/**
