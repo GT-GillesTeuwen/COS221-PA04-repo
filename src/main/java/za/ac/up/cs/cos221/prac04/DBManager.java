@@ -281,7 +281,7 @@ public class DBManager {
 			return info;
 		}
 
-		public static boolean insertFilm(int store_id, String firstName, String lastName, String email, int addressId, int active) throws SQLException {
+		public static boolean insertClient(int store_id, String firstName, String lastName, String email, int addressId, int active) throws SQLException {
 
 			if (con == null) {
 				getConnection();
