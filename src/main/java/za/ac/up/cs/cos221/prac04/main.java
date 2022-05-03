@@ -5,6 +5,9 @@
  */
 package za.ac.up.cs.cos221.prac04;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import za.ac.up.cs.cos221.prac04.GUI.DatabaseSelect;
 
 /**
@@ -16,5 +19,6 @@ public class main {
 		DatabaseSelect pane= new DatabaseSelect();
 		pane.setLocationRelativeTo(null);
 		pane.setVisible(true);
+		
         }
 }

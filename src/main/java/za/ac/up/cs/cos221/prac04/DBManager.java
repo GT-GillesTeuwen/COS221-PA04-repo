@@ -123,6 +123,39 @@ public class DBManager {
 			return info;
 		}
 
+		public static int insertAddress(String address, String address2, String district, int cityId, String postalCode, String phone) throws SQLException {
+			ResultSet res = null;
+			if (con == null) {
+				getConnection();
+			}
+			try {
+				PreparedStatement state = con.prepareStatement("INSERT INTO `u18059288_u21465772_sakila`.`address` "
+					+ "(`address`, `address2`, `district`, `city_id`, `postal_code`, `phone`) "
+					+ "VALUES (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
+
+				state.setString(1, address);
+				state.setString(2, address2);
+				state.setString(3, district);
+				state.setInt(4, cityId);
+				state.setString(5, postalCode);
+				state.setString(6, phone);
+
+				state.executeUpdate();
+				res = state.getGeneratedKeys();
+				while (res.next()) {
+					int idColVar = res.getInt(1);
+					// Get automatically generated key
+					// value
+					System.out.println("automatically generated key value = " + idColVar);
+					return idColVar;
+				}
+				return 0;
+			} catch (SQLException ex) {
+				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+				return 0;
+			}
+		}
+
 		public static boolean insertFilm(String title, String description, int releaseYear, int languageID, int originalLanguageID,
 										 int rentalDuration, double rentalRate, int length, double replacementCost, String rating, String features) throws SQLException {
 			ArrayList<Film> info = new ArrayList<>();
@@ -327,26 +360,7 @@ public class DBManager {
 			}
 		}
 
-		public static ArrayList<Store> populateStore() throws SQLException{
-			ArrayList<Store> info = new ArrayList<>();
-			ResultSet res = null;
-			if (con == null) {
-				getConnection();
-			}
-			try{
-				Statement state = con.createStatement();
-				res = state.executeQuery("select CONCAT(city.city, _utf8mb4',', country.country) AS Store from store \n"
-						+"inner join address on store.address_id=address.address_id \n"
-						+"inner join city on address.city_id=city.city_id \n"
-						+"inner join country on city.country_id=country.country_id");
-			}catch (SQLException ex) {
-				Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
-			}
-			while(res.next()){
-				Store temp = new Store(res.getString(1));
-				info.add(temp);
-			}
-			return info;
-		}
+		
+		//public static boolean removeUser(int customer_ID, )
 	}
 }
