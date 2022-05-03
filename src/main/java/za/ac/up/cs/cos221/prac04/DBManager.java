@@ -49,6 +49,7 @@ public class DBManager {
 				bindAddress = "192.168.8.102:3306/"+db_name;
 			} else {
 				bindAddress = host+":"+port+"/"+db_name;
+				
 			}
 		}
 
