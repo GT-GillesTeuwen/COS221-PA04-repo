@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="main" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="SAKILA_DB_HOST" value="41.157.47.27" />
+      <env name="SAKILA_DB_NAME" value="u18059288_u21465772_sakila" />
+      <env name="SAKILA_DB_PASSWORD" value="P@$SW0RD_&amp;" />
+      <env name="SAKILA_DB_PORT" value="3306" />
+      <env name="SAKILA_DB_USERNAME" value="COS221_PA4" />
+      <env name="SAKILA_DB_PROTO" value="jdbc:mysql://" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="za.ac.up.cs.cos221.prac04.main" />
+    <module name="prac04" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="za.ac.up.cs.cos221.prac04.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
